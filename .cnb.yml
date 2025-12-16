@@ -24,3 +24,28 @@ main:
             git_user: "${GITHUB_USERNAME}" # 可选，设置 git user.name
             git_email: "${GITHUB_EMAIL_ADDR}" # 可选，设置 git user.email
             #git_host: "git.example.com" # 可选，如果使用自定义 Git 服务器
+        - name: send msg to feishu
+          imports: https://cnb.cool/otw1248/secret/-/blob/main/feishu.yml
+          image: tencentcom/feishu-message
+          settings:
+            robot: $msgFromCnbForMsgs
+            content: $sendingMsgToFeishuKeys - ${CNB_REPO_SLUG_LOWERCASE} succeed to sync repo from cnb to other platforms(github)!
+        - name: send msg to wecome
+          imports: https://cnb.cool/otw1248/secret/-/blob/main/wecom.yml
+          image: tencentcom/wecom-message
+          settings:
+            robot: $wecom_cnb_robot_msg
+            content: $wecom_cnb_robot_msgKeys - ${CNB_REPO_SLUG_LOWERCASE} succeed to sync repo from cnb to other platforms(github)!              
+      failStages:
+        - name: send msg to feishu
+          imports: https://cnb.cool/otw1248/secret/-/blob/main/feishu.yml
+          image: tencentcom/feishu-message
+          settings:
+            robot: $msgFromCnbForMsgs
+            content: $sendingMsgToFeishuKeys - ${CNB_REPO_SLUG_LOWERCASE} failed to sync repo from cnb to other platforms(github)!!!
+        - name: send msg to wecome
+          imports: https://cnb.cool/otw1248/secret/-/blob/main/wecom.yml
+          image: tencentcom/wecom-message
+          settings:
+            robot: $wecom_cnb_robot_msg
+            content: $wecom_cnb_robot_msgKeys - ${CNB_REPO_SLUG_LOWERCASE} failed to sync repo from cnb to other platforms(github)!!!              
