@@ -1,0 +1,26 @@
+include:
+#- .cnb/workflows/vscode.yml
+- https://cnb.cool/otw1248/public/template/templateforcnb/-/blob/main/runtime-nodejs.yml
+#- .cnb/workflows/build-image.yml
+
+  
+main:
+  push:
+    services: 
+      stages:
+        - name: sync to github
+          image: tencentcom/git-sync
+          imports: https://cnb.cool/otw1248/secret/-/blob/main/github.yml
+          timeout: 1h
+          settings:
+            target_url: "https://github.com/aegisvisionotw/ssrepo.git"
+            auth_type: "https" # 或 "https"
+            #ssh_key: "${SSH_KEY}" # 如果使用 SSH
+            username: "${GITHUB_USERNAME}" # 如果使用 HTTPS
+            password: "${ssrepoGithubToken}" # 如果使用 HTTPS
+            branch: "main" # 可选，指定要推送的分支
+            force: true # 可选，是否强制推送
+            push_tags: true # 可选，是否推送标签
+            git_user: "${GITHUB_USERNAME}" # 可选，设置 git user.name
+            git_email: "${GITHUB_EMAIL_ADDR}" # 可选，设置 git user.email
+            #git_host: "git.example.com" # 可选，如果使用自定义 Git 服务器
