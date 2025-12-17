@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中国个人所得税指南</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #3b82f6;
+            --accent-color: #ef4444;
+            --success-color: #22c55e;
+            --warning-color: #f59e0b;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --bg-light: #f8fafc;
+            --bg-white: #ffffff;
+            --border-color: #e5e7eb;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-lg);
+            text-align: center;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .main-content {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .section-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .reminder-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .reminder-card {
+            background: linear-gradient(135deg, var(--accent-color), #dc2626);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: var(--shadow-md);
+            transition: transform 0.3s ease;
+        }
+
+        .reminder-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .reminder-card.warning {
+            background: linear-gradient(135deg, var(--warning-color), #d97706);
+        }
+
+        .reminder-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .reminder-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .reminder-date {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .calculator-form {
+            background: var(--bg-light);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .result-container {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 2px solid var(--success-color);
+            margin-top: 1.5rem;
+            display: none;
+        }
+
+        .result-container.show {
+            display: block;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        .result-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--success-color);
+            margin-bottom: 1rem;
+        }
+
+        .result-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+
+        .result-item {
+            text-align: center;
+            padding: 1rem;
+            background: var(--bg-light);
+            border-radius: 8px;
+        }
+
+        .result-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.25rem;
+        }
+
+        .result-value {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .info-section {
+            margin-bottom: 2rem;
+        }
+
+        .info-section h3 {
+            font-size: 1.3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            padding-left: 1rem;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .info-list {
+            list-style: none;
+            padding-left: 1rem;
+        }
+
+        .info-list li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .info-list li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .notice-box {
+            background: #fef3c7;
+            border-left: 4px solid var(--warning-color);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .notice-box h4 {
+            color: var(--warning-color);
+            margin-bottom: 0.5rem;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            header, .section-card {
+                padding: 1.5rem;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>中国个人所得税指南</h1>
+            <p class="subtitle">全面了解个人所得税政策、计算方法和申报流程</p>
+        </header>
+
+        <main class="main-content">
+            <!-- 重要提醒部分 -->
+            <section class="section-card">
+                <h2 class="section-title">
+                    ⏰ 重要时间提醒
+                </h2>
+                <div class="reminder-container">
+                    <div class="reminder-card">
+                        <div class="reminder-icon">📝</div>
+                        <div class="reminder-title">专项附加扣除填报</div>
+                        <div class="reminder-date">每年12月底前完成</div>
+                        <p style="margin-top: 0.5rem; font-size: 0.9rem;">子女教育、继续教育、大病医疗、住房贷款利息、住房租金、赡养老人等6项专项附加扣除</p>
+                    </div>
+                    <div class="reminder-card warning">
+                        <div class="reminder-icon">📊</div>
+                        <div class="reminder-title">综合所得年度汇算</div>
+                        <div class="reminder-date">3月1日至6月30日</div>
+                        <p style="margin-top: 0.5rem; font-size: 0.9rem;">对上一年度的工资薪金、劳务报酬、稿酬、特许权使用费等综合所得进行汇算清缴</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 个税计算器部分 -->
+            <section class="section-card">
+                <h2 class="section-title">
+                    🧮 个人所得税计算器
+                </h2>
+                <div class="calculator-form">
+                    <div class="form-group">
+                        <label for="incomeType">收入类型</label>
+                        <select id="incomeType">
+                            <option value="salary">工资薪金所得</option>
+                            <option value="annual">年度综合所得</option>
+                            <option value="bonus">全年一次性奖金</option>
+                            <option value="labor">劳务报酬所得</option>
+                        </select>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="income">收入金额（元）</label>
+                            <input type="number" id="income" placeholder="请输入收入金额" min="0">
+                        </div>
+                        <div class="form-group">
+                            <label for="socialInsurance">社保公积金（元）</label>
+                            <input type="number" id="socialInsurance" placeholder="个人缴纳部分" min="0">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="specialDeduction">专项附加扣除（元）</label>
+                            <input type="number" id="specialDeduction" placeholder="每月可扣除金额" min="0">
+                        </div>
+                        <div class="form-group">
+                            <label for="otherDeduction">其他扣除（元）</label>
+                            <input type="number" id="otherDeduction" placeholder="企业年金、商业保险等" min="0">
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary" onclick="calculateTax()">
+                        计算个税
+                    </button>
+
+                    <div id="result" class="result-container">
+                        <div class="result-title">计算结果</div>
+                        <div class="result-grid">
+                            <div class="result-item">
+                                <div class="result-label">应纳税所得额</div>
+                                <div class="result-value" id="taxableIncome">¥0</div>
+                            </div>
+                            <div class="result-item">
+                                <div class="result-label">适用税率</div>
+                                <div class="result-value" id="taxRate">0%</div>
+                            </div>
+                            <div class="result-item">
+                                <div class="result-label">应纳税额</div>
+                                <div class="result-value" id="taxAmount">¥0</div>
+                            </div>
+                            <div class="result-item">
+                                <div class="result-label">税后收入</div>
+                                <div class="result-value" id="afterTaxIncome">¥0</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 个税概述和注意事项部分 -->
+            <section class="section-card">
+                <h2 class="section-title">
+                    📚 个人所得税概述
+                </h2>
+                
+                <div class="info-section">
+                    <h3>纳税人范围</h3>
+                    <ul class="info-list">
+                        <li>居民个人：在中国境内有住所，或者无住所而在一个纳税年度内在中国境内居住累计满183天的个人</li>
+                        <li>非居民个人：在中国境内无住所又不居住，或者无住所而在中国境内居住不满183天的个人</li>
+                    </ul>
+                </div>
+
+                <div class="info-section">
+                    <h3>应税所得项目</h3>
+                    <ul class="info-list">
+                        <li>综合所得：工资薪金、劳务报酬、稿酬、特许权使用费</li>
+                        <li>经营所得</li>
+                        <li>利息、股息、红利所得</li>
+                        <li>财产租赁所得</li>
+                        <li>财产转让所得</li>
+                        <li>偶然所得</li>
+                    </ul>
+                </div>
+
+                <div class="info-section">
+                    <h3>综合所得税率表（2024年）</h3>
+                    <div style="overflow-x: auto;">
+                        <table style="width: 100%; border-collapse: collapse; margin-top: 1rem;">
+                            <thead>
+                                <tr style="background: var(--bg-light);">
+                                    <th style="padding: 0.75rem; border: 1px solid var(--border-color);">级数</th>
+                                    <th style="padding: 0.75rem; border: 1px solid var(--border-color);">全年应纳税所得额</th>
+                                    <th style="padding: 0.75rem; border: 1px solid var(--border-color);">税率(%)</th>
+                                    <th style="padding: 0.75rem; border: 1px solid var(--border-color);">速算扣除数</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td style="padding: 0.75rem; border: 1px solid var(--border-color);">1</td><td style="padding: 0.75rem; border: 1px solid var(--border-color);">不超过36,000元</td><td style="padding: 0.75rem; border: 1px solid var(--border-color);">3</td><td style="padding: 0.75rem; border: 1px solid var(--border-color);">0</td></tr>
+                                <tr><td style="padding: 0.75rem; border: 1px solid var(--border-color);">2</td><td style="padding: 0.75rem; border: 1px solid var(--border-color);">36,000-144,000元</td><td style="padding: 0.75rem; border: 1px solid var(--border-color);">10</td><td style="padding: 0.75rem; border: 1px solid var(--border-color);">2,520</td></tr>
+                                <tr><td style="padding: 0.75rem; border: 1px solid var(--border-color);">3</td><td style="padding: 0.75rem; border: 1px solid var(--border-color);">144,000-300,000元</td><td style="padding: 0.75rem; border: 1px solid var(--border-color);">20</td><td style="padding: 0.75rem; border: 1px solid var(--border-color);">16,920</td></tr>
+                                <tr><td style="padding: 0.75rem; border: 1px solid var(--border-color);">4</td><td style="padding: 0.75rem; border: 1px solid var(--border-color);">300,000-420,000元</td><td style="padding: 0.75rem; border: 1px solid var(--border-color);">25</td><td style="padding: 0.75rem; border: 1px solid var(--border-color);">31,920</td></tr>
+                                <tr><td style="padding: 0.75rem; border: 1px solid var(--border-color);">5</td><td style="padding: 0.75rem; border: 1px solid var(--border-color);">420,000-660,000元</td><td style="padding: 0.75rem; border: 1px solid var(--border-color);">30</td><td style="padding: 0.75rem; border: 1px solid var(--border-color);">52,920</td></tr>
+                                <tr><td style="padding: 0.75rem; border: 1px solid var(--border-color);">6</td><td style="padding: 0.75rem; border: 1px solid var(--border-color);">660,000-960,000元</td><td style="padding: 0.75rem; border: 1px solid var(--border-color);">35</td><td style="padding: 0.75rem; border: 1px solid var(--border-color);">85,920</td></tr>
+                                <tr><td style="padding: 0.75rem; border: 1px solid var(--border-color);">7</td><td style="padding: 0.75rem; border: 1px solid var(--border-color);">超过960,000元</td><td style="padding: 0.75rem; border: 1px solid var(--border-color);">45</td><td style="padding: 0.75rem; border: 1px solid var(--border-color);">181,920</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="info-section">
+                    <h3>专项附加扣除标准</h3>
+                    <ul class="info-list">
+                        <li>子女教育：每个子女每月1,000元（2023年8月起提高到2,000元）</li>
+                        <li>继续教育：每月400元（学历教育）或每年3,600元（职业资格）</li>
+                        <li>大病医疗：每年最高80,000元（实际支出扣除15,000元后）</li>
+                        <li>住房贷款利息：每月1,000元</li>
+                        <li>住房租金：根据城市不同，每月800-1,500元</li>
+                        <li>赡养老人：每月2,000元（2023年8月起提高到3,000元）</li>
+                        <li>3岁以下婴幼儿照护：每个婴幼儿每月1,000元（2023年8月起提高到2,000元）</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 注意事项部分 -->
+            <section class="section-card">
+                <h2 class="section-title">
+                    ⚠️ 重要注意事项
+                </h2>
+
+                <div class="notice-box">
+                    <h4>申报义务</h4>
+                    <p>纳税人必须如实申报收入和扣除项目，提供虚假信息将面临税务处罚，包括罚款和信用记录影响。</p>
+                </div>
+
+                <div class="notice-box">
+                    <h4>专项附加扣除填报</h4>
+                    <p>专项附加扣除信息需要如实填报，相关证明材料应妥善保管，税务部门可能会进行核查。</p>
+                </div>
+
+                <div class="notice-box">
+                    <h4>年度汇算要求</h4>
+                    <p>符合下列情形之一的，需要办理年度汇算：</p>
+                    <ul style="margin-top: 0.5rem; margin-left: 1rem;">
+                        <li>已预缴税额大于年度应纳税额且申请退税的</li>
+                        <li>综合所得收入超过12万元且需要补税金额超过400元的</li>
+                    </ul>
+                </div>
+
+                <div class="info-section">
+                    <h3>申报方式</h3>
+                    <ul class="info-list">
+                        <li>自然人电子税务局（网页版、APP）</li>
+                        <li>个人所得税APP</li>
+                        <li>扣缴义务人代为申报</li>
+                        <li>办税服务厅现场申报</li>
+                    </ul>
+                </div>
+
+                <div class="info-section">
+                    <h3>常见问题</h3>
+                    <ul class="info-list">
+                        <li>多收入来源纳税人需要合并所有收入进行年度汇算</li>
+                        <li>境外收入也需要申报个人所得税</li>
+                        <li>离职人员的年终奖可以选择单独计税或合并计税</li>
+                        <li>公益性捐赠在应纳税所得额30%以内可以扣除</li>
+                    </ul>
+                </div>
+
+                <div class="info-section">
+                    <h3>法律责任</h3>
+                    <ul class="info-list">
+                        <li>未按期申报：按日加收万分之五的滞纳金</li>
+                        <li>虚假申报：处不缴或者少缴的税款百分之五十以上五倍以下的罚款</li>
+                        <li>逃税罪：数额较大并且占应纳税额10%以上的，处三年以下有期徒刑</li>
+                        <li>列入税收违法"黑名单"，影响征信记录</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        function calculateTax() {
+            const incomeType = document.getElementById('incomeType').value;
+            const income = parseFloat(document.getElementById('income').value) || 0;
+            const socialInsurance = parseFloat(document.getElementById('socialInsurance').value) || 0;
+            const specialDeduction = parseFloat(document.getElementById('specialDeduction').value) || 0;
+            const otherDeduction = parseFloat(document.getElementById('otherDeduction').value) || 0;
+
+            let taxableIncome = 0;
+            let taxRate = 0;
+            let quickDeduction = 0;
+            let taxAmount = 0;
+
+            if (incomeType === 'salary') {
+                // 工资薪金月度计算
+                taxableIncome = Math.max(0, income - 5000 - socialInsurance - specialDeduction - otherDeduction);
+                
+                if (taxableIncome <= 3000) { taxRate = 3; quickDeduction = 0; }
+                else if (taxableIncome <= 12000) { taxRate = 10; quickDeduction = 210; }
+                else if (taxableIncome <= 25000) { taxRate = 20; quickDeduction = 1410; }
+                else if (taxableIncome <= 35000) { taxRate = 25; quickDeduction = 2660; }
+                else if (taxableIncome <= 55000) { taxRate = 30; quickDeduction = 4410; }
+                else if (taxableIncome <= 80000) { taxRate = 35; quickDeduction = 7160; }
+                else { taxRate = 45; quickDeduction = 15160; }
+                
+                taxAmount = Math.max(0, taxableIncome * taxRate / 100 - quickDeduction);
+            } else if (incomeType === 'annual') {
+                // 年度综合所得计算
+                const annualSocial = socialInsurance * 12;
+                const annualSpecial = specialDeduction * 12;
+                const annualOther = otherDeduction * 12;
+                taxableIncome = Math.max(0, income - 60000 - annualSocial - annualSpecial - annualOther);
+                
+                if (taxableIncome <= 36000) { taxRate = 3; quickDeduction = 0; }
+                else if (taxableIncome <= 144000) { taxRate = 10; quickDeduction = 2520; }
+                else if (taxableIncome <= 300000) { taxRate = 20; quickDeduction = 16920; }
+                else if (taxableIncome <= 420000) { taxRate = 25; quickDeduction = 31920; }
+                else if (taxableIncome <= 660000) { taxRate = 30; quickDeduction = 52920; }
+                else if (taxableIncome <= 960000) { taxRate = 35; quickDeduction = 85920; }
+                else { taxRate = 45; quickDeduction = 181920; }
+                
+                taxAmount = Math.max(0, taxableIncome * taxRate / 100 - quickDeduction);
+            } else if (incomeType === 'bonus') {
+                // 全年一次性奖金（可选择单独计税）
+                taxableIncome = Math.max(0, income / 12);
+                
+                if (taxableIncome <= 3000) { taxRate = 3; quickDeduction = 0; }
+                else if (taxableIncome <= 12000) { taxRate = 10; quickDeduction = 210; }
+                else if (taxableIncome <= 25000) { taxRate = 20; quickDeduction = 1410; }
+                else if (taxableIncome <= 35000) { taxRate = 25; quickDeduction = 2660; }
+                else if (taxableIncome <= 55000) { taxRate = 30; quickDeduction = 4410; }
+                else if (taxableIncome <= 80000) { taxRate = 35; quickDeduction = 7160; }
+                else { taxRate = 45; quickDeduction = 15160; }
+                
+                taxAmount = Math.max(0, income * taxRate / 100 - quickDeduction);
+                taxableIncome = income; // 显示原始收入作为应纳税所得额
+            } else if (incomeType === 'labor') {
+                // 劳务报酬所得
+                const feeDeduction = income < 4000 ? 800 : income * 0.2;
+                taxableIncome = Math.max(0, income * 0.8 - feeDeduction);
+                
+                if (taxableIncome <= 20000) { taxRate = 20; quickDeduction = 0; }
+                else if (taxableIncome <= 30000) { taxRate = 30; quickDeduction = 2000; }
+                else { taxRate = 40; quickDeduction = 7000; }
+                
+                taxAmount = Math.max(0, taxableIncome * taxRate / 100 - quickDeduction);
+            }
+
+            const afterTaxIncome = income - (incomeType === 'salary' ? socialInsurance : 0) - taxAmount;
+
+            // 显示结果
+            document.getElementById('taxableIncome').textContent = '¥' + taxableIncome.toFixed(2);
+            document.getElementById('taxRate').textContent = taxRate + '%';
+            document.getElementById('taxAmount').textContent = '¥' + taxAmount.toFixed(2);
+            document.getElementById('afterTaxIncome').textContent = '¥' + afterTaxIncome.toFixed(2);
+            
+            document.getElementById('result').classList.add('show');
+        }
+
+        // 页面加载时添加动画
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.section-card');
+            cards.forEach((card, index) => {
+                card.style.animationDelay = (index * 0.1) + 's';
+            });
+        });
+    </script>
+</body>
+</html>

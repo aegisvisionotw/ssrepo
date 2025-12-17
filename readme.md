@@ -34,6 +34,15 @@ This project contains a modern web dashboard with login functionality. → 这�
   - Structured content with sections and highlights → 结构化内容，包含章节和高亮
   - Mobile-responsive design with animations → 带动画的移动端响应式设计
 
+### 4. personalIncomeTaxCN.html → 中国个人所得税文件
+- **Purpose → 用途**: China personal income tax guide and calculator → 中国个人所得税指南和计算器
+- **Features → 特性**:
+  - Tax deadline reminders for special deductions and annual settlement → 专项附加扣除和年度汇算截止时间提醒
+  - Interactive tax calculator for multiple income types → 多种收入类型的交互式税收计算器
+  - Comprehensive tax policy overview and legal notices → 全面的税收政策概要和法律注意事项
+  - Tax rate tables and deduction standards → 税率表和扣除标准
+  - Mobile-responsive design with modern UI → 现代化UI的移动端响应式设计
+
 ## Design Features → 设计特性
 
 ### Visual Design → 视觉设计
@@ -73,6 +82,7 @@ English Text → 中文文本
 - "tools → 工具"
 - "FE finance economic → 金融经济"
 - "Buffett Letters → 巴菲特致股东信"
+- "Personal Income Tax CN → 中国个人所得税"
 - "View → 查看"
 
 ## Usage → 使用方法
@@ -80,7 +90,9 @@ English Text → 中文文本
 1. **Open home.html → 打开首页**: Start at the main dashboard → 从主仪表板开始
 2. **Choose service → 选择服务**: Select from available categories → 从可用分类中选择
    - **Tools → 工具**: Click "Login → 登录" for authentication → 点击"Login → 登录"进行认证
-   - **Finance/Economics → 金融经济**: Click "View → 查看" for Buffett Letters → 点击"View → 查看"查看巴菲特致股东信
+   - **Finance/Economics → 金融经济**: 
+     - Click "View → 查看" for Buffett Letters → 点击"View → 查看"查看巴菲特致股东信
+     - Click "View → 查看" for Personal Income Tax → 点击"View → 查看"查看中国个人所得税指南
 3. **Access content → 访问内容**: Navigate to selected service page → 导航到选定的服务页面
 4. **Interact with features → 交互功能**: Use forms, read content, or explore data → 使用表单、阅读内容或探索数据
 
@@ -112,6 +124,8 @@ Potential improvements could include: → 可能的改进包括：
 - Password encryption → 密码加密
 - User session management → 用户会话管理
 - Additional finance/economics tools → 额外的金融经济工具
+- Tax planning and optimization tools → 税务规划和优化工具
+- Multi-country tax calculators → 多国税收计算器
 - Investment calculator integration → 投资计算器集成
 - Real-time market data feeds → 实时市场数据源
 - Dark mode support → 深色模式支持
@@ -119,7 +133,7 @@ Potential improvements could include: → 可能的改进包括：
 ---
 
 **Author → 作者**: Web Dashboard Team → 网络仪表板团队  
-**Version → 版本**: 1.1.0  
+**Version → 版本**: 1.2.0  
 **Last Updated → 最后更新**: 2025-12-17
 
 ---
