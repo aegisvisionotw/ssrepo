@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Mode Calculator → 多模式计算器</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3), transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3), transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.2), transparent 50%);
+            z-index: -1;
+        }
+
+        .calculator-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 30px;
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+            max-width: 500px;
+            width: 100%;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .mode-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+            background: rgba(255, 255, 255, 0.5);
+            padding: 8px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .mode-tab {
+            flex: 1;
+            padding: 12px 16px;
+            border: none;
+            background: transparent;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 500;
+            color: #666;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        .mode-tab:hover {
+            background: rgba(103, 126, 234, 0.1);
+        }
+
+        .mode-tab.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .display {
+            background: linear-gradient(135deg, #1e293b, #334155);
+            color: white;
+            padding: 20px 25px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 
+                inset 0 2px 10px rgba(0, 0, 0, 0.3),
+                0 1px 0 rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .display::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .display:hover::before {
+            left: 100%;
+        }
+
+        .display-text {
+            font-size: 32px;
+            font-weight: 300;
+            text-align: right;
+            letter-spacing: 2px;
+            min-height: 40px;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        .conversion-display {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 15px;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .conversion-input {
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 15px;
+            font-size: 16px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .conversion-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .conversion-arrow {
+            color: #667eea;
+            font-size: 20px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .select-wrapper {
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        .select-wrapper select {
+            width: 100%;
+            padding: 12px 40px 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            background: white;
+            font-size: 14px;
+            cursor: pointer;
+            appearance: none;
+            transition: all 0.3s ease;
+        }
+
+        .select-wrapper::after {
+            content: '▼';
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #667eea;
+            pointer-events: none;
+        }
+
+        .select-wrapper select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .buttons-grid {
+            display: grid;
+            gap: 12px;
+        }
+
+        .basic-grid {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        .scientific-grid {
+            grid-template-columns: repeat(5, 1fr);
+        }
+
+        .calc-btn {
+            padding: 20px;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .calc-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .calc-btn:active::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .calc-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .calc-btn:active {
+            transform: translateY(0);
+        }
+
+        .btn-number {
+            background: #f8fafc;
+            color: #1e293b;
+        }
+
+        .btn-number:hover {
+            background: #e2e8f0;
+        }
+
+        .btn-operator {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .btn-operator:hover {
+            background: linear-gradient(135deg, #5a6fd8, #6a4190);
+        }
+
+        .btn-equals {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            grid-column: span 2;
+        }
+
+        .btn-equals:hover {
+            background: linear-gradient(135deg, #0ea572, #047857);
+        }
+
+        .btn-clear {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+        }
+
+        .btn-clear:hover {
+            background: linear-gradient(135deg, #dc2626, #b91c1c);
+        }
+
+        .btn-function {
+            background: #fbbf24;
+            color: #1e293b;
+        }
+
+        .btn-function:hover {
+            background: #f59e0b;
+        }
+
+        .btn-zero {
+            grid-column: span 2;
+        }
+
+        .history-panel {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            max-height: 150px;
+            overflow-y: auto;
+        }
+
+        .history-item {
+            padding: 8px 12px;
+            margin-bottom: 5px;
+            background: white;
+            border-radius: 6px;
+            font-size: 14px;
+            color: #64748b;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .history-value {
+            font-weight: 500;
+            color: #1e293b;
+        }
+
+        .clear-history {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .clear-history:hover {
+            background: #dc2626;
+        }
+
+        @media (max-width: 640px) {
+            .calculator-container {
+                padding: 20px;
+                margin: 10px;
+            }
+            
+            .display-text {
+                font-size: 24px;
+            }
+            
+            .calc-btn {
+                padding: 15px;
+                font-size: 16px;
+            }
+            
+            .scientific-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator-container">
+        <h1 class="text-2xl font-bold text-center mb-6 text-gray-800">
+            Calculator → 计算器
+        </h1>
+        
+        <!-- Mode Tabs -->
+        <div class="mode-tabs">
+            <button class="mode-tab active" onclick="switchMode('basic')">
+                Basic → 基础
+            </button>
+            <button class="mode-tab" onclick="switchMode('scientific')">
+                Scientific → 科学
+            </button>
+            <button class="mode-tab" onclick="switchMode('conversion')">
+                Conversion → 换算
+            </button>
+        </div>
+
+        <!-- Basic Calculator -->
+        <div id="basic-mode" class="mode-content">
+            <div class="display">
+                <div class="display-text" id="basic-display">0</div>
+            </div>
+            
+            <div class="buttons-grid basic-grid">
+                <button class="calc-btn btn-clear" onclick="clearBasic()">C</button>
+                <button class="calc-btn btn-function" onclick="appendToBasic('(')">(</button>
+                <button class="calc-btn btn-function" onclick="appendToBasic(')')">)</button>
+                <button class="calc-btn btn-operator" onclick="appendToBasic('/')">÷</button>
+                
+                <button class="calc-btn btn-number" onclick="appendToBasic('7')">7</button>
+                <button class="calc-btn btn-number" onclick="appendToBasic('8')">8</button>
+                <button class="calc-btn btn-number" onclick="appendToBasic('9')">9</button>
+                <button class="calc-btn btn-operator" onclick="appendToBasic('*')">×</button>
+                
+                <button class="calc-btn btn-number" onclick="appendToBasic('4')">4</button>
+                <button class="calc-btn btn-number" onclick="appendToBasic('5')">5</button>
+                <button class="calc-btn btn-number" onclick="appendToBasic('6')">6</button>
+                <button class="calc-btn btn-operator" onclick="appendToBasic('-')">−</button>
+                
+                <button class="calc-btn btn-number" onclick="appendToBasic('1')">1</button>
+                <button class="calc-btn btn-number" onclick="appendToBasic('2')">2</button>
+                <button class="calc-btn btn-number" onclick="appendToBasic('3')">3</button>
+                <button class="calc-btn btn-operator" onclick="appendToBasic('+')">+</button>
+                
+                <button class="calc-btn btn-number btn-zero" onclick="appendToBasic('0')">0</button>
+                <button class="calc-btn btn-number" onclick="appendToBasic('.')">.</button>
+                <button class="calc-btn btn-equals" onclick="calculateBasic()">=</button>
+            </div>
+        </div>
+
+        <!-- Scientific Calculator -->
+        <div id="scientific-mode" class="mode-content" style="display: none;">
+            <div class="display">
+                <div class="display-text" id="scientific-display">0</div>
+            </div>
+            
+            <div class="buttons-grid scientific-grid">
+                <button class="calc-btn btn-clear" onclick="clearScientific()">C</button>
+                <button class="calc-btn btn-function" onclick="appendScientific('Math.sin(')">sin</button>
+                <button class="calc-btn btn-function" onclick="appendScientific('Math.cos(')">cos</button>
+                <button class="calc-btn btn-function" onclick="appendScientific('Math.tan(')">tan</button>
+                <button class="calc-btn btn-operator" onclick="appendScientific('/')">÷</button>
+                
+                <button class="calc-btn btn-function" onclick="appendScientific('Math.log(')">ln</button>
+                <button class="calc-btn btn-function" onclick="appendScientific('Math.log10(')">log</button>
+                <button class="calc-btn btn-function" onclick="appendScientific('Math.sqrt(')">√</button>
+                <button class="calc-btn btn-function" onclick="appendScientific('Math.pow(')">x^y</button>
+                <button class="calc-btn btn-operator" onclick="appendScientific('*')">×</button>
+                
+                <button class="calc-btn btn-number" onclick="appendScientific('7')">7</button>
+                <button class="calc-btn btn-number" onclick="appendScientific('8')">8</button>
+                <button class="calc-btn btn-number" onclick="appendScientific('9')">9</button>
+                <button class="calc-btn btn-function" onclick="appendScientific('Math.PI')">π</button>
+                <button class="calc-btn btn-operator" onclick="appendScientific('-')">−</button>
+                
+                <button class="calc-btn btn-number" onclick="appendScientific('4')">4</button>
+                <button class="calc-btn btn-number" onclick="appendScientific('5')">5</button>
+                <button class="calc-btn btn-number" onclick="appendScientific('6')">6</button>
+                <button class="calc-btn btn-function" onclick="appendScientific('Math.E')">e</button>
+                <button class="calc-btn btn-operator" onclick="appendScientific('+')">+</button>
+                
+                <button class="calc-btn btn-number" onclick="appendScientific('1')">1</button>
+                <button class="calc-btn btn-number" onclick="appendScientific('2')">2</button>
+                <button class="calc-btn btn-number" onclick="appendScientific('3')">3</button>
+                <button class="calc-btn btn-function" onclick="appendScientific('(')">(</button>
+                <button class="calc-btn btn-equals" onclick="calculateScientific()">=</button>
+                
+                <button class="calc-btn btn-number" onclick="appendScientific('0')" style="grid-column: span 2;">0</button>
+                <button class="calc-btn btn-number" onclick="appendScientific('.')">.</button>
+                <button class="calc-btn btn-function" onclick="appendScientific(')')">)</button>
+            </div>
+        </div>
+
+        <!-- Conversion Calculator -->
+        <div id="conversion-mode" class="mode-content" style="display: none;">
+            <div class="select-wrapper">
+                <select id="conversion-type" onchange="updateConversionInputs()">
+                    <option value="length">Length → 长度</option>
+                    <option value="weight">Weight → 重量</option>
+                    <option value="temperature">Temperature → 温度</option>
+                    <option value="area">Area → 面积</option>
+                    <option value="volume">Volume → 体积</option>
+                    <option value="speed">Speed → 速度</option>
+                    <option value="pressure">Pressure → 压力</option>
+                    <option value="power">Power → 功率</option>
+                    <option value="energy">Energy → 能量</option>
+                    <option value="force">Force → 力</option>
+                    <option value="angle">Angle → 角度</option>
+                    <option value="time">Time → 时间</option>
+                    <option value="data">Data Storage → 数据存储</option>
+                    <option value="currency">Currency → 货币</option>
+                </select>
+            </div>
+            
+            <div class="conversion-display">
+                <input type="number" class="conversion-input" id="from-value" placeholder="Enter value → 输入值" oninput="performConversion()">
+                <div class="conversion-arrow">→</div>
+                <input type="number" class="conversion-input" id="to-value" placeholder="Result → 结果" readonly>
+            </div>
+            
+            <div class="select-wrapper">
+                <select id="from-unit" onchange="performConversion()">
+                    <option value="meter">Meter → 米</option>
+                    <option value="kilometer">Kilometer → 千米</option>
+                    <option value="centimeter">Centimeter → 厘米</option>
+                    <option value="mile">Mile → 英里</option>
+                    <option value="yard">Yard → 码</option>
+                    <option value="foot">Foot → 英尺</option>
+                    <option value="inch">Inch → 英寸</option>
+                </select>
+            </div>
+            
+            <div class="select-wrapper">
+                <select id="to-unit" onchange="performConversion()">
+                    <option value="meter">Meter → 米</option>
+                    <option value="kilometer">Kilometer → 千米</option>
+                    <option value="centimeter">Centimeter → 厘米</option>
+                    <option value="mile">Mile → 英里</option>
+                    <option value="yard">Yard → 码</option>
+                    <option value="foot">Foot → 英尺</option>
+                    <option value="inch">Inch → 英寸</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- History Panel -->
+        <div class="history-panel">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                <h3 class="text-sm font-semibold text-gray-700">History → 历史</h3>
+                <button class="clear-history" onclick="clearHistory()">Clear → 清除</button>
+            </div>
+            <div id="history-list"></div>
+        </div>
+    </div>
+
+    <script>
+        let currentMode = 'basic';
+        let basicExpression = '0';
+        let scientificExpression = '0';
+        let calculationHistory = [];
+
+        // Mode switching
+        function switchMode(mode) {
+            currentMode = mode;
+            
+            // Update tabs
+            document.querySelectorAll('.mode-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Show/hide content
+            document.querySelectorAll('.mode-content').forEach(content => {
+                content.style.display = 'none';
+            });
+            document.getElementById(mode + '-mode').style.display = 'block';
+            
+            // Update conversion inputs if switching to conversion mode
+            if (mode === 'conversion') {
+                updateConversionInputs();
+            }
+        }
+
+        // Basic Calculator Functions
+        function appendToBasic(value) {
+            if (basicExpression === '0' && value !== '.') {
+                basicExpression = value;
+            } else {
+                basicExpression += value;
+            }
+            updateBasicDisplay();
+        }
+
+        function clearBasic() {
+            basicExpression = '0';
+            updateBasicDisplay();
+        }
+
+        function calculateBasic() {
+            try {
+                const result = eval(basicExpression.replace(/×/g, '*').replace(/÷/g, '/').replace(/−/g, '-'));
+                addToHistory(basicExpression, result);
+                basicExpression = result.toString();
+                updateBasicDisplay();
+            } catch (error) {
+                basicExpression = 'Error → 错误';
+                updateBasicDisplay();
+                setTimeout(() => {
+                    basicExpression = '0';
+                    updateBasicDisplay();
+                }, 2000);
+            }
+        }
+
+        function updateBasicDisplay() {
+            document.getElementById('basic-display').textContent = basicExpression;
+        }
+
+        // Scientific Calculator Functions
+        function appendScientific(value) {
+            if (scientificExpression === '0' && value !== '.') {
+                scientificExpression = value;
+            } else {
+                scientificExpression += value;
+            }
+            updateScientificDisplay();
+        }
+
+        function clearScientific() {
+            scientificExpression = '0';
+            updateScientificDisplay();
+        }
+
+        function calculateScientific() {
+            try {
+                const result = eval(scientificExpression);
+                addToHistory(scientificExpression, result);
+                scientificExpression = result.toString();
+                updateScientificDisplay();
+            } catch (error) {
+                scientificExpression = 'Error → 错误';
+                updateScientificDisplay();
+                setTimeout(() => {
+                    scientificExpression = '0';
+                    updateScientificDisplay();
+                }, 2000);
+            }
+        }
+
+        function updateScientificDisplay() {
+            document.getElementById('scientific-display').textContent = scientificExpression;
+        }
+
+        // Conversion Functions
+        function updateConversionInputs() {
+            const type = document.getElementById('conversion-type').value;
+            const fromUnit = document.getElementById('from-unit');
+            const toUnit = document.getElementById('to-unit');
+            
+            // Clear current values
+            document.getElementById('from-value').value = '';
+            document.getElementById('to-value').value = '';
+            
+            // Update unit options based on conversion type
+            switch(type) {
+                case 'length':
+                    updateUnitOptions([
+                        {value: 'meter', text: 'Meter → 米'},
+                        {value: 'kilometer', text: 'Kilometer → 千米'},
+                        {value: 'centimeter', text: 'Centimeter → 厘米'},
+                        {value: 'millimeter', text: 'Millimeter → 毫米'},
+                        {value: 'mile', text: 'Mile → 英里'},
+                        {value: 'yard', text: 'Yard → 码'},
+                        {value: 'foot', text: 'Foot → 英尺'},
+                        {value: 'inch', text: 'Inch → 英寸'}
+                    ]);
+                    break;
+                case 'weight':
+                    updateUnitOptions([
+                        {value: 'kilogram', text: 'Kilogram → 千克'},
+                        {value: 'gram', text: 'Gram → 克'},
+                        {value: 'milligram', text: 'Milligram → 毫克'},
+                        {value: 'pound', text: 'Pound → 磅'},
+                        {value: 'ounce', text: 'Ounce → 盎司'},
+                        {value: 'ton', text: 'Ton → 吨'}
+                    ]);
+                    break;
+                case 'temperature':
+                    updateUnitOptions([
+                        {value: 'celsius', text: 'Celsius → 摄氏度'},
+                        {value: 'fahrenheit', text: 'Fahrenheit → 华氏度'},
+                        {value: 'kelvin', text: 'Kelvin → 开尔文'}
+                    ]);
+                    break;
+                case 'area':
+                    updateUnitOptions([
+                        {value: 'square_meter', text: 'Square Meter → 平方米'},
+                        {value: 'square_kilometer', text: 'Square Kilometer → 平方千米'},
+                        {value: 'square_foot', text: 'Square Foot → 平方英尺'},
+                        {value: 'acre', text: 'Acre → 英亩'},
+                        {value: 'hectare', text: 'Hectare → 公顷'}
+                    ]);
+                    break;
+                case 'volume':
+                    updateUnitOptions([
+                        {value: 'liter', text: 'Liter → 升'},
+                        {value: 'milliliter', text: 'Milliliter → 毫升'},
+                        {value: 'gallon', text: 'Gallon → 加仑'},
+                        {value: 'quart', text: 'Quart → 夸脱'},
+                        {value: 'cup', text: 'Cup → 杯'}
+                    ]);
+                    break;
+                case 'speed':
+                    updateUnitOptions([
+                        {value: 'meter_per_second', text: 'm/s → 米/秒'},
+                        {value: 'kilometer_per_hour', text: 'km/h → 千米/时'},
+                        {value: 'mile_per_hour', text: 'mph → 英里/时'},
+                        {value: 'foot_per_second', text: 'ft/s → 英尺/秒'},
+                        {value: 'knot', text: 'Knot → 节'},
+                        {value: 'mach', text: 'Mach → 马赫'}
+                    ]);
+                    break;
+                case 'pressure':
+                    updateUnitOptions([
+                        {value: 'pascal', text: 'Pascal → 帕斯卡'},
+                        {value: 'kilopascal', text: 'Kilopascal → 千帕'},
+                        {value: 'bar', text: 'Bar → 巴'},
+                        {value: 'psi', text: 'PSI → 磅/平方英寸'},
+                        {value: 'atmosphere', text: 'Atm → 大气压'},
+                        {value: 'torr', text: 'Torr → 托'}
+                    ]);
+                    break;
+                case 'power':
+                    updateUnitOptions([
+                        {value: 'watt', text: 'Watt → 瓦特'},
+                        {value: 'kilowatt', text: 'Kilowatt → 千瓦'},
+                        {value: 'horsepower', text: 'Horsepower → 马力'},
+                        {value: 'megawatt', text: 'Megawatt → 兆瓦'},
+                        {value: 'btu_per_hour', text: 'BTU/h → 英热单位/时'}
+                    ]);
+                    break;
+                case 'energy':
+                    updateUnitOptions([
+                        {value: 'joule', text: 'Joule → 焦耳'},
+                        {value: 'kilojoule', text: 'Kilojoule → 千焦'},
+                        {value: 'calorie', text: 'Calorie → 卡路里'},
+                        {value: 'kilocalorie', text: 'Kilocalorie → 千卡'},
+                        {value: 'watt_hour', text: 'Watt-hour → 瓦时'},
+                        {value: 'kilowatt_hour', text: 'Kilowatt-hour → 千瓦时'},
+                        {value: 'btu', text: 'BTU → 英热单位'}
+                    ]);
+                    break;
+                case 'force':
+                    updateUnitOptions([
+                        {value: 'newton', text: 'Newton → 牛顿'},
+                        {value: 'kilonewton', text: 'Kilonewton → 千牛'},
+                        {value: 'pound_force', text: 'Pound-force → 磅力'},
+                        {value: 'dyne', text: 'Dyne → 达因'},
+                        {value: 'kilogram_force', text: 'kgf → 千克力'}
+                    ]);
+                    break;
+                case 'angle':
+                    updateUnitOptions([
+                        {value: 'degree', text: 'Degree → 度'},
+                        {value: 'radian', text: 'Radian → 弧度'},
+                        {value: 'gradian', text: 'Gradian → 梯度'},
+                        {value: 'turn', text: 'Turn → 圈'},
+                        {value: 'arcminute', text: 'Arcminute → 角分'},
+                        {value: 'arcsecond', text: 'Arcsecond → 角秒'}
+                    ]);
+                    break;
+                case 'time':
+                    updateUnitOptions([
+                        {value: 'second', text: 'Second → 秒'},
+                        {value: 'millisecond', text: 'Millisecond → 毫秒'},
+                        {value: 'microsecond', text: 'Microsecond → 微秒'},
+                        {value: 'minute', text: 'Minute → 分钟'},
+                        {value: 'hour', text: 'Hour → 小时'},
+                        {value: 'day', text: 'Day → 天'},
+                        {value: 'week', text: 'Week → 周'},
+                        {value: 'month', text: 'Month → 月'},
+                        {value: 'year', text: 'Year → 年'}
+                    ]);
+                    break;
+                case 'data':
+                    updateUnitOptions([
+                        {value: 'byte', text: 'Byte → 字节'},
+                        {value: 'kilobyte', text: 'Kilobyte → 千字节'},
+                        {value: 'megabyte', text: 'Megabyte → 兆字节'},
+                        {value: 'gigabyte', text: 'Gigabyte → 吉字节'},
+                        {value: 'terabyte', text: 'Terabyte → 太字节'},
+                        {value: 'petabyte', text: 'Petabyte → 拍字节'},
+                        {value: 'bit', text: 'Bit → 位'},
+                        {value: 'kilobit', text: 'Kilobit → 千位'},
+                        {value: 'megabit', text: 'Megabit → 兆位'},
+                        {value: 'gigabit', text: 'Gigabit → 吉位'}
+                    ]);
+                    break;
+                case 'currency':
+                    updateUnitOptions([
+                        {value: 'usd', text: 'USD → 美元'},
+                        {value: 'cny', text: 'CNY → 人民币'},
+                        {value: 'eur', text: 'EUR → 欧元'},
+                        {value: 'jpy', text: 'JPY → 日元'},
+                        {value: 'gbp', text: 'GBP → 英镑'}
+                    ]);
+                    break;
+            }
+        }
+
+        function updateUnitOptions(units) {
+            const fromUnit = document.getElementById('from-unit');
+            const toUnit = document.getElementById('to-unit');
+            
+            fromUnit.innerHTML = '';
+            toUnit.innerHTML = '';
+            
+            units.forEach(unit => {
+                fromUnit.innerHTML += `<option value="${unit.value}">${unit.text}</option>`;
+                toUnit.innerHTML += `<option value="${unit.value}">${unit.text}</option>`;
+            });
+            
+            // Set different default units
+            if (toUnit.options.length > 1) {
+                toUnit.selectedIndex = 1;
+            }
+        }
+
+        function performConversion() {
+            const fromValue = parseFloat(document.getElementById('from-value').value);
+            const fromUnit = document.getElementById('from-unit').value;
+            const toUnit = document.getElementById('to-unit').value;
+            const conversionType = document.getElementById('conversion-type').value;
+            
+            if (isNaN(fromValue)) {
+                document.getElementById('to-value').value = '';
+                return;
+            }
+            
+            let result = convertValue(fromValue, fromUnit, toUnit, conversionType);
+            document.getElementById('to-value').value = result.toFixed(6).replace(/\.?0+$/, '');
+        }
+
+        function convertValue(value, fromUnit, toUnit, type) {
+            // Convert to base unit first, then to target unit
+            let baseValue;
+            
+            switch(type) {
+                case 'length':
+                    const lengthFactors = {
+                        'meter': 1,
+                        'kilometer': 1000,
+                        'centimeter': 0.01,
+                        'millimeter': 0.001,
+                        'mile': 1609.344,
+                        'yard': 0.9144,
+                        'foot': 0.3048,
+                        'inch': 0.0254
+                    };
+                    baseValue = value * lengthFactors[fromUnit];
+                    return baseValue / lengthFactors[toUnit];
+                    
+                case 'weight':
+                    const weightFactors = {
+                        'kilogram': 1,
+                        'gram': 0.001,
+                        'milligram': 0.000001,
+                        'pound': 0.453592,
+                        'ounce': 0.0283495,
+                        'ton': 1000
+                    };
+                    baseValue = value * weightFactors[fromUnit];
+                    return baseValue / weightFactors[toUnit];
+                    
+                case 'temperature':
+                    if (fromUnit === toUnit) return value;
+                    
+                    // Convert to Celsius first
+                    let celsius;
+                    if (fromUnit === 'celsius') {
+                        celsius = value;
+                    } else if (fromUnit === 'fahrenheit') {
+                        celsius = (value - 32) * 5/9;
+                    } else if (fromUnit === 'kelvin') {
+                        celsius = value - 273.15;
+                    }
+                    
+                    // Convert from Celsius to target
+                    if (toUnit === 'celsius') {
+                        return celsius;
+                    } else if (toUnit === 'fahrenheit') {
+                        return celsius * 9/5 + 32;
+                    } else if (toUnit === 'kelvin') {
+                        return celsius + 273.15;
+                    }
+                    break;
+                    
+                case 'area':
+                    const areaFactors = {
+                        'square_meter': 1,
+                        'square_kilometer': 1000000,
+                        'square_foot': 0.092903,
+                        'acre': 4046.86,
+                        'hectare': 10000
+                    };
+                    baseValue = value * areaFactors[fromUnit];
+                    return baseValue / areaFactors[toUnit];
+                    
+                case 'volume':
+                    const volumeFactors = {
+                        'liter': 1,
+                        'milliliter': 0.001,
+                        'gallon': 3.78541,
+                        'quart': 0.946353,
+                        'cup': 0.236588
+                    };
+                    baseValue = value * volumeFactors[fromUnit];
+                    return baseValue / volumeFactors[toUnit];
+                    
+                case 'speed':
+                    const speedFactors = {
+                        'meter_per_second': 1,
+                        'kilometer_per_hour': 0.277778,
+                        'mile_per_hour': 0.44704,
+                        'foot_per_second': 0.3048,
+                        'knot': 0.514444,
+                        'mach': 343
+                    };
+                    baseValue = value * speedFactors[fromUnit];
+                    return baseValue / speedFactors[toUnit];
+                    
+                case 'pressure':
+                    const pressureFactors = {
+                        'pascal': 1,
+                        'kilopascal': 1000,
+                        'bar': 100000,
+                        'psi': 6894.76,
+                        'atmosphere': 101325,
+                        'torr': 133.322
+                    };
+                    baseValue = value * pressureFactors[fromUnit];
+                    return baseValue / pressureFactors[toUnit];
+                    
+                case 'power':
+                    const powerFactors = {
+                        'watt': 1,
+                        'kilowatt': 1000,
+                        'horsepower': 745.7,
+                        'megawatt': 1000000,
+                        'btu_per_hour': 0.293071
+                    };
+                    baseValue = value * powerFactors[fromUnit];
+                    return baseValue / powerFactors[toUnit];
+                    
+                case 'energy':
+                    const energyFactors = {
+                        'joule': 1,
+                        'kilojoule': 1000,
+                        'calorie': 4.184,
+                        'kilocalorie': 4184,
+                        'watt_hour': 3600,
+                        'kilowatt_hour': 3600000,
+                        'btu': 1055.06
+                    };
+                    baseValue = value * energyFactors[fromUnit];
+                    return baseValue / energyFactors[toUnit];
+                    
+                case 'force':
+                    const forceFactors = {
+                        'newton': 1,
+                        'kilonewton': 1000,
+                        'pound_force': 4.44822,
+                        'dyne': 0.00001,
+                        'kilogram_force': 9.80665
+                    };
+                    baseValue = value * forceFactors[fromUnit];
+                    return baseValue / forceFactors[toUnit];
+                    
+                case 'angle':
+                    if (fromUnit === toUnit) return value;
+                    
+                    // Convert to radians first
+                    let radians;
+                    if (fromUnit === 'degree') {
+                        radians = value * Math.PI / 180;
+                    } else if (fromUnit === 'radian') {
+                        radians = value;
+                    } else if (fromUnit === 'gradian') {
+                        radians = value * Math.PI / 200;
+                    } else if (fromUnit === 'turn') {
+                        radians = value * 2 * Math.PI;
+                    } else if (fromUnit === 'arcminute') {
+                        radians = value * Math.PI / 10800;
+                    } else if (fromUnit === 'arcsecond') {
+                        radians = value * Math.PI / 648000;
+                    }
+                    
+                    // Convert from radians to target
+                    if (toUnit === 'degree') {
+                        return radians * 180 / Math.PI;
+                    } else if (toUnit === 'radian') {
+                        return radians;
+                    } else if (toUnit === 'gradian') {
+                        return radians * 200 / Math.PI;
+                    } else if (toUnit === 'turn') {
+                        return radians / (2 * Math.PI);
+                    } else if (toUnit === 'arcminute') {
+                        return radians * 10800 / Math.PI;
+                    } else if (toUnit === 'arcsecond') {
+                        return radians * 648000 / Math.PI;
+                    }
+                    break;
+                    
+                case 'time':
+                    const timeFactors = {
+                        'second': 1,
+                        'millisecond': 0.001,
+                        'microsecond': 0.000001,
+                        'minute': 60,
+                        'hour': 3600,
+                        'day': 86400,
+                        'week': 604800,
+                        'month': 2629746, // Average month (30.44 days)
+                        'year': 31556952 // Average year (365.24 days)
+                    };
+                    baseValue = value * timeFactors[fromUnit];
+                    return baseValue / timeFactors[toUnit];
+                    
+                case 'data':
+                    const dataFactors = {
+                        'byte': 1,
+                        'kilobyte': 1024,
+                        'megabyte': 1048576,
+                        'gigabyte': 1073741824,
+                        'terabyte': 1099511627776,
+                        'petabyte': 1125899906842624,
+                        'bit': 0.125,
+                        'kilobit': 128,
+                        'megabit': 131072,
+                        'gigabit': 134217728
+                    };
+                    baseValue = value * dataFactors[fromUnit];
+                    return baseValue / dataFactors[toUnit];
+                    
+                case 'currency':
+                    // Sample exchange rates (in a real app, these would be fetched from an API)
+                    const exchangeRates = {
+                        'usd': 1,
+                        'cny': 0.14,
+                        'eur': 1.08,
+                        'jpy': 0.0067,
+                        'gbp': 1.27
+                    };
+                    baseValue = value * exchangeRates[fromUnit];
+                    return baseValue / exchangeRates[toUnit];
+            }
+            
+            return value;
+        }
+
+        // History Functions
+        function addToHistory(expression, result) {
+            const historyItem = {
+                expression: expression,
+                result: result,
+                timestamp: new Date().toLocaleTimeString()
+            };
+            
+            calculationHistory.unshift(historyItem);
+            if (calculationHistory.length > 10) {
+                calculationHistory.pop();
+            }
+            
+            updateHistoryDisplay();
+        }
+
+        function updateHistoryDisplay() {
+            const historyList = document.getElementById('history-list');
+            historyList.innerHTML = '';
+            
+            calculationHistory.forEach(item => {
+                const historyDiv = document.createElement('div');
+                historyDiv.className = 'history-item';
+                historyDiv.innerHTML = `
+                    <span>${item.expression}</span>
+                    <span class="history-value">= ${item.result}</span>
+                `;
+                historyList.appendChild(historyDiv);
+            });
+        }
+
+        function clearHistory() {
+            calculationHistory = [];
+            updateHistoryDisplay();
+        }
+
+        // Keyboard support
+        document.addEventListener('keydown', function(event) {
+            if (currentMode === 'basic') {
+                handleBasicKeyboard(event.key);
+            } else if (currentMode === 'scientific') {
+                handleScientificKeyboard(event.key);
+            }
+        });
+
+        function handleBasicKeyboard(key) {
+            if (key >= '0' && key <= '9') {
+                appendToBasic(key);
+            } else if (key === '.') {
+                appendToBasic('.');
+            } else if (key === '+') {
+                appendToBasic('+');
+            } else if (key === '-') {
+                appendToBasic('-');
+            } else if (key === '*') {
+                appendToBasic('*');
+            } else if (key === '/') {
+                event.preventDefault();
+                appendToBasic('/');
+            } else if (key === 'Enter' || key === '=') {
+                calculateBasic();
+            } else if (key === 'Escape' || key === 'c' || key === 'C') {
+                clearBasic();
+            } else if (key === '(') {
+                appendToBasic('(');
+            } else if (key === ')') {
+                appendToBasic(')');
+            } else if (key === 'Backspace') {
+                if (basicExpression.length > 1) {
+                    basicExpression = basicExpression.slice(0, -1);
+                } else {
+                    basicExpression = '0';
+                }
+                updateBasicDisplay();
+            }
+        }
+
+        function handleScientificKeyboard(key) {
+            if (key >= '0' && key <= '9') {
+                appendScientific(key);
+            } else if (key === '.') {
+                appendScientific('.');
+            } else if (key === '+') {
+                appendScientific('+');
+            } else if (key === '-') {
+                appendScientific('-');
+            } else if (key === '*') {
+                appendScientific('*');
+            } else if (key === '/') {
+                event.preventDefault();
+                appendScientific('/');
+            } else if (key === 'Enter' || key === '=') {
+                calculateScientific();
+            } else if (key === 'Escape' || key === 'c' || key === 'C') {
+                clearScientific();
+            } else if (key === '(') {
+                appendScientific('(');
+            } else if (key === ')') {
+                appendScientific(')');
+            } else if (key === 'Backspace') {
+                if (scientificExpression.length > 1) {
+                    scientificExpression = scientificExpression.slice(0, -1);
+                } else {
+                    scientificExpression = '0';
+                }
+                updateScientificDisplay();
+            }
+        }
+
+        // Initialize
+        updateBasicDisplay();
+        updateScientificDisplay();
+    </script>
+</body>
+</html>

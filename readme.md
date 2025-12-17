@@ -43,6 +43,15 @@ This project contains a modern web dashboard with login functionality. → 这�
   - Tax rate tables and deduction standards → 税率表和扣除标准
   - Mobile-responsive design with modern UI → 现代化UI的移动端响应式设计
 
+### 5. calculator.html → 多模式计算器文件
+- **Purpose → 用途**: Multi-mode calculator with extensive unit conversion → 多模式计算器和全面单位换算
+- **Features → 特性**:
+  - Three calculation modes: Basic, Scientific, and Conversion → 三种计算模式：基础、科学、换算
+  - Comprehensive unit conversions (14 categories) → 全面单位换算（14个类别）
+  - Calculation history and keyboard support → 计算历史和键盘支持
+  - Modern glassmorphism design with animations → 现代毛玻璃设计和动画效果
+  - Fully responsive for all devices → 全设备响应式设计
+
 ## Design Features → 设计特性
 
 ### Visual Design → 视觉设计
@@ -83,13 +92,17 @@ English Text → 中文文本
 - "FE finance economic → 金融经济"
 - "Buffett Letters → 巴菲特致股东信"
 - "Personal Income Tax CN → 中国个人所得税"
+- "Calculator → 计算器"
 - "View → 查看"
+- "Use → 使用"
 
 ## Usage → 使用方法
 
 1. **Open home.html → 打开首页**: Start at the main dashboard → 从主仪表板开始
 2. **Choose service → 选择服务**: Select from available categories → 从可用分类中选择
-   - **Tools → 工具**: Click "Login → 登录" for authentication → 点击"Login → 登录"进行认证
+   - **Tools → 工具**: 
+     - Click "Login → 登录" for authentication → 点击"Login → 登录"进行认证
+     - Click "Use → 使用" for Calculator → 点击"Use → 使用"使用多模式计算器
    - **Finance/Economics → 金融经济**: 
      - Click "View → 查看" for Buffett Letters → 点击"View → 查看"查看巴菲特致股东信
      - Click "View → 查看" for Personal Income Tax → 点击"View → 查看"查看中国个人所得税指南
@@ -126,6 +139,8 @@ Potential improvements could include: → 可能的改进包括：
 - Additional finance/economics tools → 额外的金融经济工具
 - Tax planning and optimization tools → 税务规划和优化工具
 - Multi-country tax calculators → 多国税收计算器
+- Advanced scientific calculator functions → 高级科学计算功能
+- More unit conversion categories → 更多单位换算类别
 - Investment calculator integration → 投资计算器集成
 - Real-time market data feeds → 实时市场数据源
 - Dark mode support → 深色模式支持
@@ -133,7 +148,7 @@ Potential improvements could include: → 可能的改进包括：
 ---
 
 **Author → 作者**: Web Dashboard Team → 网络仪表板团队  
-**Version → 版本**: 1.2.0  
+**Version → 版本**: 1.3.0  
 **Last Updated → 最后更新**: 2025-12-17
 
 ---
