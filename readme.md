@@ -43,7 +43,16 @@ This project contains a modern web dashboard with login functionality. → 这�
   - Tax rate tables and deduction standards → 税率表和扣除标准
   - Mobile-responsive design with modern UI → 现代化UI的移动端响应式设计
 
-### 5. calculator.html → 多模式计算器文件
+### 5. resources.html → 资源页面文件
+- **Purpose → 用途**: Comprehensive resource directory for AI tools and services → AI工具和服务的综合资源目录
+- **Features → 特性**:
+  - Bilingual resource listings (English/Chinese) → 双语资源列表（英语/中文）
+  - Categorized entries for AI platforms, cloud services, and development tools → AI平台、云服务和开发工具的分类条目
+  - Modern responsive table with hover effects → 现代响应式表格，带悬浮效果
+  - Direct links to popular AI tools (OpenAI, Gemini, Qwen, etc.) → 流行AI工具的直接链接（OpenAI、Gemini、通义千问等）
+  - Glassmorphism design with gradient background → 毛玻璃设计与渐变背景
+
+### 6. calculator.html → 多模式计算器文件
 - **Purpose → 用途**: Multi-mode calculator with extensive unit conversion → 多模式计算器和全面单位换算
 - **Features → 特性**:
   - Three calculation modes: Basic, Scientific, and Conversion → 三种计算模式：基础、科学、换算
@@ -92,6 +101,7 @@ English Text → 中文文本
 - "FE finance economic → 金融经济"
 - "Buffett Letters → 巴菲特致股东信"
 - "Personal Income Tax CN → 中国个人所得税"
+- "Resources → 资源"
 - "Calculator → 计算器"
 - "View → 查看"
 - "Use → 使用"
@@ -103,6 +113,7 @@ English Text → 中文文本
    - **Tools → 工具**: 
      - Click "Login → 登录" for authentication → 点击"Login → 登录"进行认证
      - Click "Use → 使用" for Calculator → 点击"Use → 使用"使用多模式计算器
+     - Click "View → 查看" for Resources → 点击"View → 查看"查看资源目录
    - **Finance/Economics → 金融经济**: 
      - Click "View → 查看" for Buffett Letters → 点击"View → 查看"查看巴菲特致股东信
      - Click "View → 查看" for Personal Income Tax → 点击"View → 查看"查看中国个人所得税指南
@@ -110,6 +121,9 @@ English Text → 中文文本
 4. **Interact with features → 交互功能**: Use forms, read content, or explore data → 使用表单、阅读内容或探索数据
 
 ## Technical Details → 技术细节
+
+### Files Added → 新增文件
+- **resources.html → 资源页面**: Resource directory with AI tools and services → 带有AI工具和服务的资源目录
 
 ### Technologies Used → 使用的技术
 - **HTML5 → HTML5**: Semantic markup → 语义化标记
@@ -148,7 +162,7 @@ Potential improvements could include: → 可能的改进包括：
 ---
 
 **Author → 作者**: Web Dashboard Team → 网络仪表板团队  
-**Version → 版本**: 1.3.0  
+**Version → 版本**: 1.4.0  
 **Last Updated → 最后更新**: 2025-12-17
 
 ---
