@@ -1,0 +1,188 @@
+# robots.txt
+# Last Updated: 2025-12-17
+# Webmaster: webmaster@otw128.net
+
+# This file contains rules for web crawlers and search engines
+# Uncomment and modify rules as needed for your specific site
+
+# ==================== GLOBAL RULES ====================
+# Allow all web crawlers to access site by default
+User-agent: *
+Disallow:
+
+# Allow access to common resources for SEO
+Allow: /*.css
+Allow: /*.js
+Allow: /*.jpg
+Allow: /*.jpeg
+Allow: /*.png
+Allow: /*.gif
+Allow: /*.webp
+Allow: /*.svg
+
+# Security - Block sensitive files and directories
+Disallow: /.env
+Disallow: /.git/
+Disallow: /config/
+Disallow: /backups/
+Disallow: /logs/
+Disallow: /*.log$
+Disallow: /*.sql$
+
+# ==================== SEARCH ENGINE SPECIFIC RULES ====================
+
+# Google-specific rules
+User-agent: Googlebot
+Disallow: /admin/
+Disallow: /private/
+Crawl-delay: 1
+
+# Bing-specific rules  
+User-agent: Bingbot
+Disallow: /admin/
+Disallow: /cache/
+Crawl-delay: 2
+
+# ==================== SEO TOOLS MANAGEMENT ====================
+
+# Block aggressive SEO tools
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SEMrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+# ==================== SOCIAL MEDIA CRAWLERS ====================
+
+# Allow Facebook crawler to access images for rich previews
+User-agent: facebookexternalhit
+Allow: /*.jpg
+Allow: /*.jpeg
+Allow: /*.png
+Allow: /*.gif
+Allow: /*.webp
+
+# Allow Twitter crawler to access images
+User-agent: Twitterbot
+Allow: /*.jpg
+Allow: /*.jpeg
+Allow: /*.png
+Allow: /*.gif
+Allow: /*.webp
+
+# ==================== SPECIALIZED CRAWLERS ====================
+
+# Mobile crawlers
+User-agent: Googlebot-Mobile
+Allow: /
+
+# Image search crawlers
+User-agent: Googlebot-Image
+Allow: /images/
+Allow: /uploads/
+Allow: /fe/
+
+# Video crawlers
+User-agent: Googlebot-Video
+Allow: /videos/
+
+# News crawler (for news sites)
+# User-agent: Googlebot-News
+# Allow: /news/
+# Disallow: /news/archive/
+
+# ==================== RATE LIMITING ====================
+
+# Rate limiting for all crawlers to prevent server overload
+User-agent: *
+Crawl-delay: 1
+
+# ==================== ENVIRONMENT-SPECIFIC RULES ====================
+# Uncomment these sections as needed for your environment
+
+# Development environment (strict blocking)
+# User-agent: *
+# Disallow: /
+
+# Staging environment (limited access)
+# User-agent: *
+# Disallow: /
+
+# Production additional restrictions (uncomment if needed)
+# Disallow: /api/
+# Disallow: /v1/
+# Disallow: /graphql
+# Disallow: /login
+# Disallow: /register
+# Disallow: /dashboard
+# Disallow: /profile
+
+# ==================== E-COMMERCE RULES (Optional) ====================
+# Uncomment for e-commerce sites
+# Disallow: /cart/
+# Disallow: /checkout/
+# Disallow: /account/
+# Disallow: /wishlist/
+# Disallow: /*?utm_source=*
+# Disallow: /*?fbclid=*
+# Disallow: /*?add-to-cart=*
+# Disallow: /*?product_cat=*
+# Disallow: /*?orderby=*
+# Disallow: /*?paged=*
+
+# ==================== BLOG/CMS RULES (Optional) ====================
+# Uncomment for WordPress or other CMS sites
+# Disallow: /wp-admin/
+# Disallow: /wp-login.php
+# Disallow: /wp-includes/
+# Disallow: /wp-content/plugins/
+# Disallow: /wp-content/cache/
+# Disallow: /wp-content/themes/
+# Disallow: /trackback/
+# Disallow: /feed/
+# Disallow: /comments/
+# Disallow: */trackback/
+# Disallow: */feed/
+# Disallow: */comments/
+
+# ==================== DUPLICATE CONTENT PREVENTION (Optional) ====================
+# Uncomment to prevent duplicate content issues
+# Disallow: /search?
+# Disallow: /filter/
+# Disallow: /category/*/page/
+# Disallow: /*?sort=*
+# Disallow: /*?filter=*
+
+# ==================== SITE MAPS ====================
+# Always end with sitemap declarations for better crawling
+# Update with your actual domain and sitemap location
+Sitemap: https://otw128.net/sitemap.xml
+
+# Additional sitemaps (uncomment if needed)
+# Sitemap: https://otw128.net/sitemap-image.xml
+# Sitemap: https://otw128.net/sitemap-video.xml
+# Sitemap: https://otw128.net/sitemap-products.xml
+# Sitemap: https://otw128.net/sitemap-categories.xml
+
+# ==================== ADVANCED CONFIGURATIONS (Optional) ====================
+# Uncomment as needed for your specific requirements
+
+# Host directive (alternative to sitemap in DNS - mainly for Yandex)
+# Host: https://otw128.net
+
+# Emergency blocking - Uncomment during server issues or maintenance
+# User-agent: *
+# Disallow: /
+
+# Maintenance mode example
+# User-agent: *
+# Disallow: /
+# User-agent: Googlebot
+# Disallow: /
+
+# Time-based crawling (if supported by bot)
+# User-agent: *
+# Crawl-time: 02:00-06:00
