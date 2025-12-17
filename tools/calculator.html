@@ -20,7 +20,7 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             display: flex;
-            align-items: center;
+            flex-direction: column;
             justify-content: center;
             padding: 20px;
             position: relative;
@@ -382,7 +382,7 @@
     </style>
 </head>
 <body>
-    <div class="calculator-container">
+    <div class="calculator-container" style="margin-bottom: auto;">
         <h1 class="text-2xl font-bold text-center mb-6 text-gray-800">
             Calculator → 计算器
         </h1>
@@ -1189,9 +1189,16 @@
         fetch('/footer.html')
             .then(response => response.text())
             .then(data => {
-                document.body.insertAdjacentHTML('beforeend', data);
+                const footerContainer = document.getElementById('footer-container');
+                if (footerContainer) {
+                    footerContainer.innerHTML = data;
+                    footerContainer.style.textAlign = 'center';
+                    footerContainer.style.padding = '20px';
+                    footerContainer.style.marginTop = 'auto';
+                }
             })
             .catch(error => console.error('Error loading footer:', error));
     </script>
+    <div id="footer-container"></div>
 </body>
 </html>

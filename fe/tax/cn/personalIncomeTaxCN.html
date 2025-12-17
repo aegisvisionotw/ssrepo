@@ -650,9 +650,16 @@
         fetch('/footer.html')
             .then(response => response.text())
             .then(data => {
-                document.body.insertAdjacentHTML('beforeend', data);
+                const footerContainer = document.getElementById('footer-container');
+                if (footerContainer) {
+                    footerContainer.innerHTML = data;
+                    footerContainer.style.textAlign = 'center';
+                    footerContainer.style.padding = '20px';
+                    footerContainer.style.marginTop = 'auto';
+                }
             })
             .catch(error => console.error('Error loading footer:', error));
     </script>
+    <div id="footer-container"></div>
 </body>
 </html>
