@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Resources - Dashboard → 资源 - 仪表板</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --primary-color: #4f46e5;
+        --primary-hover: #4338ca;
+        --secondary-color: #f3f4f6;
+        --text-primary: #1f2937;
+        --text-secondary: #6b7280;
+        --border-color: #e5e7eb;
+        --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        color: var(--text-primary);
+        line-height: 1.6;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 2rem 1rem;
+      }
+
+      .container {
+        max-width: 1200px;
+        width: 100%;
+        margin: auto;
+      }
+
+      header {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 16px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        box-shadow: var(--shadow-lg);
+        text-align: center;
+      }
+
+      h1 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 0.5rem;
+      }
+
+      .subtitle {
+        color: var(--text-secondary);
+        font-size: 1.1rem;
+      }
+
+      .main-content {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 16px;
+        padding: 2rem;
+        box-shadow: var(--shadow-lg);
+        margin-bottom: 2rem;
+      }
+
+      .section-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+        color: var(--text-primary);
+      }
+
+      .table-container {
+        overflow-x: auto;
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        box-shadow: var(--shadow-sm);
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background: white;
+      }
+
+      thead {
+        background: var(--secondary-color);
+        border-bottom: 2px solid var(--border-color);
+      }
+
+      th {
+        padding: 1rem;
+        text-align: left;
+        font-weight: 600;
+        color: var(--text-primary);
+        font-size: 0.875rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      td {
+        padding: 1rem;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      tbody tr {
+        transition: background-color 0.2s ease;
+      }
+
+      tbody tr:hover {
+        background-color: #f9fafb;
+      }
+
+      tbody tr:last-child td {
+        border-bottom: none;
+      }
+
+      footer {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 16px;
+        padding: 1.5rem;
+        box-shadow: var(--shadow-md);
+        text-align: center;
+        margin-top: 2rem;
+      }
+
+      footer nav {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        flex-wrap: wrap;
+      }
+
+      footer nav a {
+        color: var(--primary-color);
+        text-decoration: none;
+        font-weight: 500;
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        transition: all 0.2s ease;
+      }
+
+      footer nav a:hover {
+        background-color: var(--secondary-color);
+        color: var(--primary-hover);
+      }
+
+      @media (max-width: 768px) {
+        body {
+          padding: 1rem 0.5rem;
+        }
+
+        h1 {
+          font-size: 2rem;
+        }
+
+        .table-container {
+          font-size: 0.875rem;
+        }
+
+        th,
+        td {
+          padding: 0.75rem 0.5rem;
+        }
+
+        footer nav {
+          flex-direction: column;
+          gap: 0.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Resources | 资源</h1>
+        <p class="subtitle">
+          Explore AI tools, cloud services, and development platforms |
+          探索AI工具、云服务和开发平台
+        </p>
+      </header>
+
+      <main class="main-content">
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>ID | 编号</th>
+                <th>Name | 名称</th>
+                <th>Label | 标签</th>
+                <th>URL | 链接</th>
+                <th>Spotlight | 重点介绍</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>OpenAI</td>
+                <td>AI Platform | AI平台</td>
+                <td>https://openai.com</td>
+                <td>
+                  Leading AI research and deployment | 领先的AI研究和部署平台
+                </td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Gemini</td>
+                <td>AI Assistant | AI助手</td>
+                <td>https://gemini.google.com</td>
+                <td>Google's conversational AI | 谷歌对话式AI</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Qwen | 通义千问</td>
+                <td>AI Model | AI模型</td>
+                <td>https://qwen.ai</td>
+                <td>Alibaba's large language model | 阿里巴巴大语言模型</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>Yuanbao | 元宝</td>
+                <td>AI Platform | AI平台</td>
+                <td>https://yuanbao.tencent.com</td>
+                <td>Tencent's AI services platform | 腾讯AI服务平台</td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td>IMA | 智能助手</td>
+                <td>AI Assistant | AI助手</td>
+                <td>https://ima.qq.com</td>
+                <td>Intelligent Mobile Assistant | 智能移动助手</td>
+              </tr>
+              <tr>
+                <td>6</td>
+                <td>Ollama</td>
+                <td>AI Platform | AI平台</td>
+                <td>https://ollama.ai</td>
+                <td>Local AI model runner | 本地AI模型运行器</td>
+              </tr>
+              <tr>
+                <td>7</td>
+                <td>GitHub Copilot</td>
+                <td>AI Assistant | AI助手</td>
+                <td>https://github.com/features/copilot</td>
+                <td>AI pair programmer | AI编程伙伴</td>
+              </tr>
+              <tr>
+                <td>8</td>
+                <td>Cloudflare</td>
+                <td>Cloud Services | 云服务</td>
+                <td>https://cloudflare.com</td>
+                <td>
+                  Web infrastructure and security | 网络基础设施和安全服务
+                </td>
+              </tr>
+              <tr>
+                <td>9</td>
+                <td>Hugging Face</td>
+                <td>AI Platform | AI平台</td>
+                <td>https://huggingface.co</td>
+                <td>Open ML and AI community | 开源机器学习和AI社区</td>
+              </tr>
+              <tr>
+                <td>10</td>
+                <td>Vercel</td>
+                <td>Cloud Platform | 云平台</td>
+                <td>https://vercel.com</td>
+                <td>Frontend deployment platform | 前端部署平台</td>
+              </tr>
+              <tr>
+                <td>11</td>
+                <td>Ali Claw | 阿里云开发</td>
+                <td>Cloud Services | 云服务</td>
+                <td>https://clouddragon.alibaba.com</td>
+                <td>Alibaba cloud development platform | 阿里巴巴云开发平台</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </main>
+    </div>
+    <script>
+      // Include footer template
+      fetch("/footer.html")
+        .then((response) => response.text())
+        .then((data) => {
+          const footerContainer = document.getElementById("footer-container");
+          if (footerContainer) {
+            footerContainer.innerHTML = data;
+            footerContainer.style.textAlign = "center";
+            footerContainer.style.padding = "20px";
+            footerContainer.style.marginTop = "auto";
+          }
+        })
+        .catch((error) => console.error("Error loading footer:", error));
+    </script>
+    <div id="footer-container"></div>
+  </body>
+</html>
