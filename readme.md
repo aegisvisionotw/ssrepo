@@ -7,10 +7,11 @@ This project contains a modern web dashboard with login functionality. → 这�
 ## Files → 文件
 
 ### 1. home.html → 首页文件
-- **Purpose → 用途**: Main dashboard page with services table → 带有服务表的主仪表板页面
+- **Purpose → 用途**: Main dashboard page with multiple service tables → 带有多个服务表的主仪表板页面
 - **Features → 特性**:
   - Modern gradient design with glassmorphism effects → 现代渐变设计与毛玻璃效果
   - Responsive layout for desktop and mobile → 桌面和移动端响应式布局
+  - Multiple categorized tables (Tools & Finance/Economics) → 多个分类表格（工具和金融经济）
   - Interactive table with service links → 带有服务链接的交互式表格
   - Bilingual support (English/Chinese) → 双语支持（英语/中文）
   - Hover animations and micro-interactions → 悬浮动画和微交互
@@ -23,6 +24,15 @@ This project contains a modern web dashboard with login functionality. → 这�
   - Mobile-responsive design → 移动端响应式设计
   - Password save functionality description → 密码保存功能描述
   - Default username pre-filled → 预填默认用户名
+
+### 3. buffettletters.html → 巴菲特致股东信文件
+- **Purpose → 用途**: Warren Buffett's shareholder letters summary page → 沃伦·巴菲特致股东信概要页面
+- **Features → 特性**:
+  - Modern financial content presentation → 现代金融内容展示
+  - S&P 500 performance chart display → 标普500表现图表展示
+  - Comprehensive investment philosophy summary → 全面的投资哲学概要
+  - Structured content with sections and highlights → 结构化内容，包含章节和高亮
+  - Mobile-responsive design with animations → 带动画的移动端响应式设计
 
 ## Design Features → 设计特性
 
@@ -39,8 +49,10 @@ This project contains a modern web dashboard with login functionality. → 这�
 ## Functionality → 功能特性
 
 ### Navigation → 导航
-- Home page includes table with login link → 首页包含带登录链接的表格
-- Click "Login → 登录" button to access authentication → 点击"Login → 登录"按钮访问认证
+- Home page includes multiple categorized tables → 首页包含多个分类表格
+- **Tools Section → 工具部分**: Contains login page link → 包含登录页面链接
+- **Finance/Economics Section → 金融经济部分**: Contains Buffett Letters link → 包含巴菲特致股东信链接
+- Click respective action buttons to access services → 点击相应操作按钮访问服务
 
 ### Form Handling → 表单处理
 - Username and password validation → 用户名和密码验证
@@ -59,13 +71,18 @@ English Text → 中文文本
 - "Login → 登录"
 - "Active → 活跃"
 - "tools → 工具"
+- "FE finance economic → 金融经济"
+- "Buffett Letters → 巴菲特致股东信"
+- "View → 查看"
 
 ## Usage → 使用方法
 
 1. **Open home.html → 打开首页**: Start at the main dashboard → 从主仪表板开始
-2. **Navigate to login → 导航到登录**: Click the login button in the table → 点击表格中的登录按钮
-3. **Fill credentials → 填写凭据**: Enter username and password → 输入用户名和密码
-4. **Submit form → 提交表单**: Click the login button to validate → 点击登录按钮进行验证
+2. **Choose service → 选择服务**: Select from available categories → 从可用分类中选择
+   - **Tools → 工具**: Click "Login → 登录" for authentication → 点击"Login → 登录"进行认证
+   - **Finance/Economics → 金融经济**: Click "View → 查看" for Buffett Letters → 点击"View → 查看"查看巴菲特致股东信
+3. **Access content → 访问内容**: Navigate to selected service page → 导航到选定的服务页面
+4. **Interact with features → 交互功能**: Use forms, read content, or explore data → 使用表单、阅读内容或探索数据
 
 ## Technical Details → 技术细节
 
@@ -94,14 +111,16 @@ Potential improvements could include: → 可能的改进包括：
 - Real authentication backend → 真实的认证后端
 - Password encryption → 密码加密
 - User session management → 用户会话管理
-- Additional service integrations → 额外的服务集成
+- Additional finance/economics tools → 额外的金融经济工具
+- Investment calculator integration → 投资计算器集成
+- Real-time market data feeds → 实时市场数据源
 - Dark mode support → 深色模式支持
 
 ---
 
 **Author → 作者**: Web Dashboard Team → 网络仪表板团队  
-**Version → 版本**: 1.0.0  
-**Last Updated → 最后更新**: 2025-12-16
+**Version → 版本**: 1.1.0  
+**Last Updated → 最后更新**: 2025-12-17
 
 ---
 
