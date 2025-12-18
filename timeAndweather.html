@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time & Weather - 世界时间和天气</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #4f46e5;
+            --primary-hover: #4338ca;
+            --secondary-color: #f3f4f6;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --border-color: #e5e7eb;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: var(--text-primary);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-lg);
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .refresh-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-top: 1rem;
+        }
+
+        .refresh-btn:hover {
+            background: var(--primary-hover);
+            transform: translateY(-1px);
+        }
+
+        .cities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .city-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-lg);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .city-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .city-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .flag {
+            font-size: 2rem;
+        }
+
+        .time-display {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .timezone {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .weather-info {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem;
+            background: var(--secondary-color);
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+
+        .weather-main {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .weather-icon {
+            font-size: 2rem;
+        }
+
+        .temperature {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .weather-description {
+            color: var(--text-secondary);
+            text-transform: capitalize;
+        }
+
+        .loading {
+            text-align: center;
+            color: var(--text-secondary);
+            padding: 2rem;
+        }
+
+        .error {
+            background: #fee;
+            color: #c00;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .last-updated {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem 0.5rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .cities-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .city-card {
+                padding: 1rem;
+            }
+
+            .time-display {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Time & Weather | 时间和天气</h1>
+            <p class="subtitle">Real-time time and weather for top travel destinations worldwide | 全球热门旅游城市实时时间和天气</p>
+            <button class="refresh-btn" onclick="refreshAllData()">🔄 Refresh Data | 刷新数据</button>
+            <div class="last-updated" id="lastUpdated">Last updated: Loading... | 最后更新：加载中...</div>
+        </header>
+
+        <main>
+            <div class="cities-grid" id="citiesGrid">
+                <div class="loading">Loading city data... | 加载城市数据中...</div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Top 20 most popular travel cities
+        const cities = [
+            { name: "Shanghai", timezone: "Asia/Shanghai", country: "CN", lat: 31.2304, lon: 121.4737 },
+            { name: "Suzhou", timezone: "Asia/Shanghai", country: "CN", lat: 31.2989, lon: 120.5853 },
+            { name: "Tokyo", timezone: "Asia/Tokyo", country: "JP", lat: 35.6762, lon: 139.6503 },
+            { name: "Paris", timezone: "Europe/Paris", country: "FR", lat: 48.8566, lon: 2.3522 },
+            { name: "New York", timezone: "America/New_York", country: "US", lat: 40.7128, lon: -74.0060 },
+            { name: "London", timezone: "Europe/London", country: "GB", lat: 51.5074, lon: -0.1278 },
+            { name: "Dubai", timezone: "Asia/Dubai", country: "AE", lat: 25.2048, lon: 55.2708 },
+            { name: "Singapore", timezone: "Asia/Singapore", country: "SG", lat: 1.3521, lon: 103.8198 },
+            { name: "Los Angeles", timezone: "America/Los_Angeles", country: "US", lat: 34.0522, lon: -118.2437 },
+            { name: "Barcelona", timezone: "Europe/Madrid", country: "ES", lat: 41.3851, lon: 2.1734 },
+            { name: "Rome", timezone: "Europe/Rome", country: "IT", lat: 41.9028, lon: 12.4964 },
+            { name: "Bangkok", timezone: "Asia/Bangkok", country: "TH", lat: 13.7563, lon: 100.5018 },
+            { name: "Istanbul", timezone: "Europe/Istanbul", country: "TR", lat: 41.0082, lon: 28.9784 },
+            { name: "Sydney", timezone: "Australia/Sydney", country: "AU", lat: -33.8688, lon: 151.2093 },
+            { name: "Hong Kong", timezone: "Asia/Hong_Kong", country: "HK", lat: 22.3193, lon: 114.1694 },
+            { name: "Amsterdam", timezone: "Europe/Amsterdam", country: "NL", lat: 52.3676, lon: 4.9041 },
+            { name: "Seoul", timezone: "Asia/Seoul", country: "KR", lat: 37.5665, lon: 126.9780 },
+            { name: "Mumbai", timezone: "Asia/Kolkata", country: "IN", lat: 19.0760, lon: 72.8777 },
+            { name: "Toronto", timezone: "America/Toronto", country: "CA", lat: 43.6532, lon: -79.3832 },
+            { name: "Berlin", timezone: "Europe/Berlin", country: "DE", lat: 52.5200, lon: 13.4050 },
+            { name: "Moscow", timezone: "Europe/Moscow", country: "RU", lat: 55.7558, lon: 37.6173 },
+
+        ];
+
+        // Weather API key (using OpenWeatherMap free tier)
+        const WEATHER_API_KEY = "YOUR_API_KEY_HERE"; // Users need to replace with their own API key
+        const WEATHER_API_URL = "https://api.openweathermap.org/data/2.5/weather";
+
+        // Country flag emojis
+        const countryFlags = {
+            'JP': '🇯🇵', 'FR': '🇫🇷', 'US': '🇺🇸', 'GB': '🇬🇧', 'AE': '🇦🇪',
+            'SG': '🇸🇬', 'ES': '🇪🇸', 'IT': '🇮🇹', 'TH': '🇹🇭', 'TR': '🇹🇷',
+            'AU': '🇦🇺', 'HK': '🇭🇰', 'NL': '🇳🇱', 'KR': '🇰🇷', 'IN': '🇮🇳',
+            'CA': '🇨🇦', 'DE': '🇩🇪', 'RU': '🇷🇺', 'CN': '🇨🇳'
+        };
+
+        // Weather icon mapping
+        const weatherIcons = {
+            '01d': '☀️', '01n': '🌙', '02d': '⛅', '02n': '☁️',
+            '03d': '☁️', '03n': '☁️', '04d': '☁️', '04n': '☁️',
+            '09d': '🌧️', '09n': '🌧️', '10d': '🌦️', '10n': '🌧️',
+            '11d': '⛈️', '11n': '⛈️', '13d': '❄️', '13n': '❄️',
+            '50d': '🌫️', '50n': '🌫️'
+        };
+
+        function formatTime(date, timezone) {
+            return new Intl.DateTimeFormat('en-US', {
+                timeZone: timezone,
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false
+            }).format(date);
+        }
+
+        function formatDate(date, timezone) {
+            return new Intl.DateTimeFormat('en-US', {
+                timeZone: timezone,
+                weekday: 'short',
+                month: 'short',
+                day: 'numeric'
+            }).format(date);
+        }
+
+        async function fetchWeather(lat, lon, cityName) {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
+            
+            try {
+                // Try OpenWeatherMap API first
+                const response = await fetch(`${WEATHER_API_URL}?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}&units=metric`, {
+                    signal: controller.signal,
+                    headers: {
+                        'Accept': 'application/json',
+                    }
+                });
+                
+                clearTimeout(timeoutId);
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    return {
+                        temperature: Math.round(data.main.temp),
+                        description: data.weather[0].description,
+                        icon: data.weather[0].icon,
+                        humidity: data.main.humidity,
+                        windSpeed: data.wind.speed,
+                        source: 'api'
+                    };
+                } else {
+                    throw new Error(`API returned ${response.status}`);
+                }
+            } catch (error) {
+                clearTimeout(timeoutId);
+                console.warn(`OpenWeatherMap failed for ${cityName}: ${error.message}, falling back to mock data`);
+            }
+
+            // Fallback to mock data for demo purposes
+            const mockWeatherData = {
+                'Tokyo': { temp: 22, desc: 'clear sky', icon: '01d' },
+                'Paris': { temp: 18, desc: 'few clouds', icon: '02d' },
+                'New York': { temp: 25, desc: 'scattered clouds', icon: '03d' },
+                'London': { temp: 16, desc: 'light rain', icon: '10d' },
+                'Dubai': { temp: 35, desc: 'clear sky', icon: '01d' },
+                'Singapore': { temp: 28, desc: 'few clouds', icon: '02d' },
+                'Los Angeles': { temp: 24, desc: 'clear sky', icon: '01d' },
+                'Barcelona': { temp: 21, desc: 'clear sky', icon: '01d' },
+                'Rome': { temp: 20, desc: 'few clouds', icon: '02d' },
+                'Bangkok': { temp: 30, desc: 'scattered clouds', icon: '03d' },
+                'Istanbul': { temp: 19, desc: 'few clouds', icon: '02d' },
+                'Sydney': { temp: 17, desc: 'clear sky', icon: '01d' },
+                'Hong Kong': { temp: 27, desc: 'few clouds', icon: '02d' },
+                'Amsterdam': { temp: 17, desc: 'overcast clouds', icon: '04d' },
+                'Seoul': { temp: 23, desc: 'few clouds', icon: '02d' },
+                'Mumbai': { temp: 32, desc: 'clear sky', icon: '01d' },
+                'Toronto': { temp: 15, desc: 'scattered clouds', icon: '03d' },
+                'Berlin': { temp: 18, desc: 'overcast clouds', icon: '04d' },
+                'Moscow': { temp: 12, desc: 'few clouds', icon: '02d' },
+                'Shanghai': { temp: 24, desc: 'clear sky', icon: '01d' },
+                'Suzhou': { temp: 23, desc: 'few clouds', icon: '02d' }
+            };
+
+            const mockData = mockWeatherData[cityName] || { temp: 20, desc: 'few clouds', icon: '02d' };
+            
+            return {
+                temperature: mockData.temp,
+                description: mockData.desc,
+                icon: mockData.icon,
+                humidity: 65,
+                windSpeed: 5.5,
+                isMock: true
+            };
+        }
+
+        async function createCityCard(city) {
+            const now = new Date();
+            const weather = await fetchWeather(city.lat, city.lon, city.name);
+            const flag = countryFlags[city.country] || '🌍';
+
+            return `
+                <div class="city-card">
+                    <div class="city-name">
+                        <span>${city.name}</span>
+                        <span class="flag">${flag}</span>
+                    </div>
+                    <div class="time-display">${formatTime(now, city.timezone)}</div>
+                    <div class="timezone">${city.timezone} | ${formatDate(now, city.timezone)}</div>
+                    
+                    <div class="weather-info">
+                        <div class="weather-main">
+                            <span class="weather-icon">${weatherIcons[weather.icon] || '🌡️'}</span>
+                            <div>
+                                <div class="temperature">${weather.temperature}°C</div>
+                                <div class="weather-description">${weather.description}</div>
+                            </div>
+                        </div>
+                        <div style="text-align: right; font-size: 0.8rem; color: var(--text-secondary);">
+                            <div>💧 ${weather.humidity}%</div>
+                            <div>💨 ${weather.windSpeed} m/s</div>
+                            ${weather.isMock ? '<div style="color: orange;">📡 Demo Data</div>' : ''}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        async function loadCities() {
+            const grid = document.getElementById('citiesGrid');
+            grid.innerHTML = '<div class="loading">Loading city data... | 加载城市数据中...</div>';
+
+            try {
+                const cityCards = await Promise.all(cities.map(city => createCityCard(city)));
+                grid.innerHTML = cityCards.join('');
+                
+                updateLastUpdated();
+                
+                // Update time every second
+                setInterval(updateTimes, 1000);
+            } catch (error) {
+                grid.innerHTML = '<div class="error">Error loading data. Please check your API key or refresh the page. | 数据加载错误。请检查API密钥或刷新页面。</div>';
+            }
+        }
+
+        function updateTimes() {
+            const cards = document.querySelectorAll('.city-card');
+            const now = new Date();
+            
+            cards.forEach((card, index) => {
+                const city = cities[index];
+                const timeDisplay = card.querySelector('.time-display');
+                const timezone = card.querySelector('.timezone');
+                
+                if (timeDisplay && city) {
+                    timeDisplay.textContent = formatTime(now, city.timezone);
+                    const dateText = formatDate(now, city.timezone);
+                    timezone.textContent = `${city.timezone} | ${dateText}`;
+                }
+            });
+        }
+
+        function updateLastUpdated() {
+            const lastUpdated = document.getElementById('lastUpdated');
+            const now = new Date();
+            lastUpdated.textContent = `Last updated: ${now.toLocaleString()} | 最后更新: ${now.toLocaleString()}`;
+        }
+
+        async function refreshAllData() {
+            const grid = document.getElementById('citiesGrid');
+            grid.innerHTML = '<div class="loading">Refreshing data... | 刷新数据中...</div>';
+            await loadCities();
+        }
+
+        // Initialize the page
+        loadCities();
+    </script>
+
+    <script>
+        // Include footer template (same as other pages)
+        fetch("/footer.html")
+            .then(response => response.text())
+            .then(data => {
+                const footerContainer = document.createElement('div');
+                footerContainer.id = 'footer-container';
+                footerContainer.innerHTML = data;
+                footerContainer.style.textAlign = 'center';
+                footerContainer.style.padding = '20px';
+                footerContainer.style.marginTop = '2rem';
+                footerContainer.style.background = 'rgba(255, 255, 255, 0.95)';
+                footerContainer.style.backdropFilter = 'blur(10px)';
+                footerContainer.style.borderRadius = '16px';
+                footerContainer.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.1)';
+                document.body.appendChild(footerContainer);
+            })
+            .catch(error => console.error('Error loading footer:', error));
+    </script>
+</body>
+</html>

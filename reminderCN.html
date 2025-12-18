@@ -1,0 +1,1478 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2025-2026年度家庭生活与财务规划全提醒</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #7c3aed;
+            --accent-color: #dc2626;
+            --success-color: #16a34a;
+            --warning-color: #f59e0b;
+            --info-color: #0891b2;
+            --light-bg: #f8fafc;
+            --white: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow-lg);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .nav-tabs {
+            display: flex;
+            background: var(--white);
+            border-radius: 12px;
+            padding: 8px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow-md);
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+
+        .nav-tab {
+            flex: 1;
+            min-width: 150px;
+            padding: 12px 20px;
+            border: none;
+            background: transparent;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            font-weight: 500;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .nav-tab:hover {
+            background: var(--light-bg);
+            transform: translateY(-1px);
+        }
+
+        .nav-tab.active {
+            background: var(--primary-color);
+            color: var(--white);
+            box-shadow: var(--shadow-md);
+        }
+
+        .content-section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .card-icon {
+            font-size: 1.5rem;
+            margin-right: 12px;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .card-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .card-content li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 12px;
+            line-height: 1.6;
+        }
+
+        .card-content li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border-left: 4px solid var(--warning-color);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .important-box {
+            background: linear-gradient(135deg, #fee2e2, #fecaca);
+            border-left: 4px solid var(--accent-color);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .success-box {
+            background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+            border-left: 4px solid var(--success-color);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, #cffafe, #a5f3fc);
+            border-left: 4px solid var(--info-color);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--white);
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background: var(--light-bg);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin: 2px;
+        }
+
+        .badge-primary { background: var(--primary-color); color: var(--white); }
+        .badge-warning { background: var(--warning-color); color: var(--white); }
+        .badge-success { background: var(--success-color); color: var(--white); }
+        .badge-danger { background: var(--accent-color); color: var(--white); }
+        .badge-info { background: var(--info-color); color: var(--white); }
+
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--primary-color);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -22px;
+            top: 8px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            border: 2px solid var(--white);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .floating-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: var(--shadow-lg);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .floating-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.2);
+        }
+
+        .search-box {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow-md);
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 20px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            margin-top: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .nav-tabs {
+                flex-direction: column;
+            }
+
+            .nav-tab {
+                width: 100%;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .floating-button {
+                bottom: 20px;
+                right: 20px;
+                width: 50px;
+                height: 50px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid var(--border-color);
+            border-radius: 50%;
+            border-top-color: var(--primary-color);
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .print-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--primary-color);
+            color: var(--white);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .print-button:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        @media print {
+            .floating-button,
+            .print-button,
+            .nav-tabs,
+            .search-box {
+                display: none;
+            }
+
+            .content-section {
+                display: block !important;
+            }
+
+            body {
+                background: var(--white);
+            }
+
+            .card {
+                box-shadow: none;
+                border: 1px solid var(--border-color);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button class="print-button" onclick="window.print()">🖨️ 打印</button>
+        
+        <header>
+            <h1>2025-2026年度家庭生活与财务规划全提醒</h1>
+            <p class="subtitle">全面掌握重要时间节点，科学规划家庭未来</p>
+        </header>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">6</div>
+                <div class="stat-label">大核心规划领域</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">30+</div>
+                <div class="stat-label">重要时间节点</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">实用建议覆盖</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">365</div>
+                <div class="stat-label">天全年规划周期</div>
+            </div>
+        </div>
+
+        <div class="search-box">
+            <input type="text" class="search-input" placeholder="🔍 搜索提醒内容..." id="searchInput">
+        </div>
+
+        <nav class="nav-tabs" role="tablist" aria-label="内容分类导航">
+            <button class="nav-tab active" onclick="showSection('tax', this)" role="tab" aria-selected="true" aria-controls="tax" tabindex="0" id="tax-tab">💰 个税规划</button>
+            <button class="nav-tab" onclick="showSection('insurance', this)" role="tab" aria-selected="false" aria-controls="insurance" tabindex="-1" id="insurance-tab">🛡️ 医疗保险</button>
+            <button class="nav-tab" onclick="showSection('family', this)" role="tab" aria-selected="false" aria-controls="family" tabindex="-1" id="family-tab">👨‍👩‍👧‍👦 家庭保险</button>
+            <button class="nav-tab" onclick="showSection('student', this)" role="tab" aria-selected="false" aria-controls="student" tabindex="-1" id="student-tab">🎓 学生健康</button>
+            <button class="nav-tab" onclick="showSection('energy', this)" role="tab" aria-selected="false" aria-controls="energy" tabindex="-1" id="energy-tab">⚡ 能源管理</button>
+            <button class="nav-tab" onclick="showSection('safety', this)" role="tab" aria-selected="false" aria-controls="safety" tabindex="-1" id="safety-tab">🏠 安全防护</button>
+        </nav>
+
+        <main role="main">
+            <!-- 个税规划部分 -->
+            <section id="tax" class="content-section active" role="tabpanel" aria-labelledby="tax-tab">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8); color: white;">📅</div>
+                        <h2 class="card-title">专项附加扣除确认：为2025年享受优惠打好基础</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="highlight-box">
+                            <strong>官方确认期：</strong>2024年12月1日至2024年12月31日<br>
+                            <strong>为何必须确认：</strong>即使信息无变化也需确认，否则次年1月起暂停扣除
+                        </div>
+                        
+                        <h3 style="margin: 20px 0 10px 0; color: var(--primary-color);">操作入口与流程</h3>
+                        <ul>
+                            <li><strong>主要平台：</strong>"个人所得税"手机APP</li>
+                            <li><strong>"一键确认"流程（信息无变动时）：</strong>登录APP → 进入"确认下一年度专项附加扣除" → "一键带入"2024年信息 → 核对 → "一键确认"</li>
+                            <li><strong>信息有变动或首次填报：</strong>选择扣除年度"2025"，逐项据实填报</li>
+                        </ul>
+
+                        <h3 style="margin: 20px 0 10px 0; color: var(--primary-color);">核心注意事项与常见错误</h3>
+                        <ul>
+                            <li><strong>项目范围：</strong>子女教育、继续教育、大病医疗、住房贷款利息、住房租金、赡养老人、3岁以下婴幼儿照护（共七项）</li>
+                            <li><strong>避免重复申报：</strong>家庭共同项目（如子女教育）需夫妻协商分配额度，禁止双方重复全额申报</li>
+                            <li><strong>信息真实与留存凭证：</strong>对信息真实性负责，留存证明材料备查</li>
+                            <li><strong>及时更新动态信息：</strong>扣除条件变化时（如子女教育结束）需及时更新或终止</li>
+                            <li><strong>比例之和不能超限：</strong>为同一子女填报教育扣除，父母双方比例之和≤100%</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon" style="background: linear-gradient(135deg, #10b981, #059669); color: white;">💰</div>
+                        <h2 class="card-title">综合所得汇算清缴：2024年收入的年度"结算"</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="success-box">
+                            <strong>办理期限：</strong>2025年3月1日至2025年6月30日<br>
+                            <strong>预约办理：</strong>3月1日至3月20日需预约；3月21日至6月30日无需预约
+                        </div>
+
+                        <h3 style="margin: 20px 0 10px 0; color: var(--primary-color);">您需要办理汇算清缴吗？</h3>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 15px 0;">
+                            <div class="info-box">
+                                <strong>需要办理：</strong>
+                                <ul style="margin-top: 10px;">
+                                    <li>预缴税款 > 全年应纳税额（申请退税）</li>
+                                    <li>预缴税款 < 全年应纳税额且补税金额 > 400元</li>
+                                </ul>
+                            </div>
+                            <div class="success-box">
+                                <strong>无需办理：</strong>
+                                <ul style="margin-top: 10px;">
+                                    <li>年度综合所得收入 ≤ 12万元</li>
+                                    <li>补税金额 ≤ 400元</li>
+                                    <li>已预缴税额与应纳税额一致或不申请退税</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <h3 style="margin: 20px 0 10px 0; color: var(--primary-color);">逾期未办的后果</h3>
+                        <div class="important-box">
+                            <ul>
+                                <li>加收滞纳金（每日万分之五）</li>
+                                <li>影响个人纳税信用</li>
+                                <li>可能面临罚款等处罚</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 医疗保险部分 -->
+            <section id="insurance" class="content-section">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon" style="background: linear-gradient(135deg, #06b6d4, #0891b2); color: white;">📅</div>
+                        <h2 class="card-title">核心时间节点：年底前务必完成</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="important-box">
+                                    <strong>城乡居民基本医疗保险（儿童/居民医保）</strong>
+                                    <ul style="margin-top: 10px;">
+                                        <li><strong>集中缴费期：</strong>多数地区为2025年第四季度，普遍于12月20日、25日或31日截止</li>
+                                        <li><strong>逾期后果：</strong>错过集中缴费期将面临3个月待遇等待期</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="warning-box">
+                                    <strong>惠民保</strong>
+                                    <ul style="margin-top: 10px;">
+                                        <li><strong>集中参保期：</strong>绝大多数城市产品投保窗口于2025年12月底关闭</li>
+                                        <li><strong>逾期后果：</strong>通常无法补缴，保障存在空窗期</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: white;">💡</div>
+                        <h2 class="card-title">关键信息与行动指南</h2>
+                    </div>
+                    <div class="card-content">
+                        <h3 style="margin: 20px 0 10px 0; color: var(--primary-color);">1. 城乡居民医保：为家庭筑牢基础保障网</h3>
+                        <ul>
+                            <li><strong>缴费标准：</strong>各地不同，大致在300元至650元/年之间</li>
+                            <li><strong>官方办理渠道：</strong>
+                                <ul>
+                                    <li>参保登记：当地医保小程序、"国家医保服务平台"APP、本地政务APP</li>
+                                    <li>线上缴费：微信/支付宝搜索"XX税务社保费缴纳"小程序</li>
+                                    <li>家庭共济缴费：职工医保参保人可通过医保平台使用个人账户余额为家人缴费</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <h3 style="margin: 20px 0 10px 0; color: var(--primary-color);">2. 惠民保：补充高额医疗费用的普惠选择</h3>
+                        <ul>
+                            <li><strong>产品特点与趋势：</strong>普遍"加量不加价"，提升保额、降低免赔额等</li>
+                            <li><strong>分层定价：</strong>许多产品根据年龄或健康状况实行分层定价</li>
+                            <li><strong>参保前提：</strong>必须是当地基本医保（职工医保或居民医保）的参保人</li>
+                            <li><strong>官方入口与甄别：</strong>通过产品官方指定的微信公众号、支付宝、当地政务APP等合作平台投保</li>
+                            <li><strong>重要提醒：</strong>仔细阅读条款，关注"既往症"认定、赔付比例、免赔额等</li>
+                        </ul>
+
+                        <div class="info-box">
+                            <strong>家庭协同规划建议：</strong>
+                            <ul>
+                                <li>清查每位家庭成员的基本医保参保状态</li>
+                                <li>统一办理时间，列入12月"家庭财务日"</li>
+                                <li>善用职工医保个人账户家庭共济功能</li>
+                                <li>根据家庭成员健康状况搭配保障方案</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 家庭保险部分 -->
+            <section id="family" class="content-section">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon" style="background: linear-gradient(135deg, #ec4899, #db2777); color: white;">🎯</div>
+                        <h2 class="card-title">配置时机与核心原则：把握窗口，科学规划</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="highlight-box">
+                            <strong>把握两大市场窗口期</strong>
+                            <ul style="margin-top: 10px;">
+                                <li><strong>费率调整窗口：</strong>保险行业预定利率已下调，新重疾险等保费上涨，建议尽快锁定当前费率</li>
+                                <li><strong>个人健康窗口：</strong>遵循"越早越好，健康时投保"原则</li>
+                            </ul>
+                        </div>
+
+                        <div class="success-box">
+                            <strong>遵循三项核心配置原则</strong>
+                            <ul style="margin-top: 10px;">
+                                <li>先保障，后理财</li>
+                                <li>先大人，后小孩与老人</li>
+                                <li>先保额，后期限与品牌</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon" style="background: linear-gradient(135deg, #f59e0b, #d97706); color: white;">📊</div>
+                        <h2 class="card-title">分险种详解：构筑家庭保障"四大支柱"</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="table-responsive">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>险种类别</th>
+                                        <th>核心价值与功能</th>
+                                        <th>配置要点与建议</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>意外险</strong></td>
+                                        <td>应对突发意外，覆盖意外身故/伤残、医疗费用。杠杆高。</td>
+                                        <td>
+                                            1. <strong>购买时机：</strong>家庭责任加重、父母年满60岁前等<br>
+                                            2. <strong>保额建议：</strong>经济支柱应为年收入5-10倍；儿童≤20万；老人重意外医疗<br>
+                                            3. <strong>产品选择：</strong>优选0免赔、100%报销、不限社保的综合意外险
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>重疾险</strong></td>
+                                        <td>弥补收入损失，确诊约定重疾后一次性给付。</td>
+                                        <td>
+                                            1. <strong>购买时机：</strong>立即行动，规避保费上涨和核保变严风险<br>
+                                            2. <strong>保额标准：</strong>建议为个人3-5倍年收入，底线不低于30万元<br>
+                                            3. <strong>产品选择：</strong>预算内优先选消费型做高保额，关注高发轻/中症赔付
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>百万医疗险</strong></td>
+                                        <td>报销高额医疗费，弥补社保和重疾险缺口。</td>
+                                        <td>
+                                            1. <strong>必要搭配：</strong>与重疾险互补，家庭必备<br>
+                                            2. <strong>选购关键：</strong>必须优先选择"保证续保"条款的产品<br>
+                                            3. <strong>适用人群：</strong>所有健康状况允许的家庭成员
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>定期寿险</strong></td>
+                                        <td>履行家庭责任，身故/全残后赔付，用于偿还债务、抚养子女等。</td>
+                                        <td>
+                                            1. <strong>配置对象：</strong>家庭经济支柱必须配置<br>
+                                            2. <strong>保额确定：</strong>应覆盖家庭总负债 + 未来5-10年家庭必要生活开支<br>
+                                            3. <strong>期限选择：</strong>覆盖家庭责任最重时期（如至60岁或房贷还清时）
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="info-box" style="margin-top: 20px;">
+                            <strong>2025-2026年度家庭保险配置清单与行动路线</strong>
+                            <div class="timeline" style="margin-top: 15px;">
+                                <div class="timeline-item">
+                                    <strong>立即启动检视：</strong>整理家庭现有保单，评估保额、保障期限是否匹配当前需求
+                                </div>
+                                <div class="timeline-item">
+                                    <strong>优先查漏补缺：</strong>
+                                    <ul>
+                                        <li>经济支柱：确保重疾险（50万+）、百万医疗险（保证续保）、定期寿险、综合意外险（100万）齐全</li>
+                                        <li>子女：配置少儿重疾险（50万）、百万医疗险、少儿意外险</li>
+                                        <li>老人：重点配置防癌险/医疗险、老年意外险</li>
+                                    </ul>
+                                </div>
+                                <div class="timeline-item">
+                                    <strong>把握投保窗口：</strong>重点关注重疾险，建议在2026年新生命表生效前完成决策投保
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 学生健康部分 -->
+            <section id="student" class="content-section">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon" style="background: linear-gradient(135deg, #14b8a6, #0d9488); color: white;">🗓️</div>
+                        <h2 class="card-title">第一步：掌握假期时间表，提前规划安排</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="table-responsive">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>地区</th>
+                                        <th>寒假开始时间</th>
+                                        <th>暑假开始时间</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>北京市（义务教育）</strong></td>
+                                        <td>2026年1月24日</td>
+                                        <td>2026年7月8日</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>北京市（高中）</strong></td>
+                                        <td>2026年1月31日</td>
+                                        <td>2026年7月15日</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>上海市</strong></td>
+                                        <td>2026年2月2日</td>
+                                        <td>2026年7月1日</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>广东省（广深等）</strong></td>
+                                        <td>2026年1月31日</td>
+                                        <td>2026年7月11日</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>东北地区</strong></td>
+                                        <td>2026年1月15-16日</td>
+                                        <td>2026年7月上旬</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="info-box" style="margin-top: 15px;">
+                            <strong>核心提醒：</strong>合理利用假期，保障孩子休息与自主发展时间
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon" style="background: linear-gradient(135deg, #ef4444, #dc2626); color: white;">💉</div>
+                        <h2 class="card-title">第二步：锁定健康防护黄金期，完成流感疫苗接种</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="important-box">
+                            <strong>最佳接种时间：</strong>9月至10月是"黄金窗口期"，尽量在10月底前完成
+                        </div>
+
+                        <h3 style="margin: 20px 0 10px 0; color: var(--primary-color);">不同年龄段接种程序</h3>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                            <div class="highlight-box">
+                                <strong>6月龄至8岁儿童</strong>
+                                <ul style="margin-top: 10px;">
+                                    <li>首次接种灭活疫苗需2剂次（间隔≥4周）</li>
+                                    <li>既往接种过则仅需1剂次</li>
+                                </ul>
+                            </div>
+                            <div class="success-box">
+                                <strong>9岁及以上儿童及成人</strong>
+                                <ul style="margin-top: 10px;">
+                                    <li>每年仅需1剂次</li>
+                                    <li>流感疫苗每年更新，必须每年接种</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="info-box" style="margin-top: 15px;">
+                            <strong>行动建议：</strong>2025年9月开学后即可安排，通过社区卫生服务中心等官方渠道预约
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon" style="background: linear-gradient(135deg, #6366f1, #4f46e5); color: white;">🩺</div>
+                        <h2 class="card-title">第三步：利用假期进行年度健康评估，科学选择体检</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="table-responsive">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>对比维度</th>
+                                        <th>公立医院体检中心</th>
+                                        <th>第三方体检机构/平台</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>主要入口</strong></td>
+                                        <td>医院官方公众号、官网、电话预约</td>
+                                        <td>机构自有平台、综合性预约平台</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>核心优势</strong></td>
+                                        <td>报告权威性高，设备技术强，便于院内转诊</td>
+                                        <td>预约便捷、服务体验好，套餐选择多且常有促销</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>预约周期</strong></td>
+                                        <td>需提前规划，热门医院可能需提前1-15天</td>
+                                        <td>普遍灵活，支持提前1-3天，部分可次日或当天约</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>总结建议</strong></td>
+                                        <td>追求报告权威性和后续医疗衔接时优选</td>
+                                        <td>时间紧张，希望一站式比价、看重服务时优选</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h3 style="margin: 20px 0 10px 0; color: var(--primary-color);">各年龄段学生体检项目重点推荐</h3>
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <strong>学龄前期 (3-6岁)：</strong>基础体格检查、血尿常规；重点关注视力、口腔、贫血筛查；必要时进行发育筛查
+                            </div>
+                            <div class="timeline-item">
+                                <strong>学龄期及青春期 (6-18岁)：</strong>持续监测生长发育；核心关注视力、脊柱侧弯、营养不良/肥胖；青春期关注性发育和骨龄；肥胖儿童需增加血压、血脂、血糖等检查；留意心理健康
+                            </div>
+                        </div>
+
+                        <div class="highlight-box" style="margin-top: 15px;">
+                            <strong>家庭联动提醒：</strong>家长可根据《成人健康体检项目推荐指引（2025年版）》同步规划自身健康检查
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 能源管理部分 -->
+            <section id="energy" class="content-section">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon" style="background: linear-gradient(135deg, #fbbf24, #f59e0b); color: white;">🔌</div>
+                        <h2 class="card-title">阶梯电价优化与峰谷电价选择</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="info-box">
+                            <strong>阶梯电价新动向：</strong>政策导向动态优化分档，提高首档上限、缩小档间价差，普遍按年为周期执行
+                        </div>
+
+                        <h3 style="margin: 20px 0 10px 0; color: var(--primary-color);">分档标准参考（地区差异）</h3>
+                        <div class="table-responsive">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>地区模式</th>
+                                        <th>分档标准</th>
+                                        <th>加价标准</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>江苏模式</strong></td>
+                                        <td>月用电量分三档，首档230度内</td>
+                                        <td>二档加价0.05元/度，三档加价0.30元/度</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>北京模式</strong></td>
+                                        <td>月用电量分三档，首档240度内</td>
+                                        <td>二档加价0.05元/度，三档加价0.30元/度</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>上海模式</strong></td>
+                                        <td>按年度电量划分三档，首档0-3120度（含）</td>
+                                        <td>阶梯递增加价</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>广东模式</strong></td>
+                                        <td>实行夏（5-10月）、非夏（11月-次年4月）不同标准</td>
+                                        <td>季节性差异化定价</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="success-box">
+                            <strong>峰谷电价是省钱关键：</strong>鼓励自愿选择，电费按"先峰谷、后阶梯"计算。将大功率电器使用安排在夜间谷时段可节省电费
+                        </div>
+
+                        <div class="highlight-box">
+                            <strong>特殊保障：</strong>对"低保户"等家庭提供每月10-15度免费用电基数
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon" style="background: linear-gradient(135deg, #fb923c, #f97316); color: white;">⛽</div>
+                        <h2 class="card-title">燃气充值：把握年底优惠窗口</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="table-responsive">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>活动名称</th>
+                                        <th>适用地区</th>
+                                        <th>核心优惠</th>
+                                        <th>关键时间/方式</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>浦发银行信用卡满减</td>
+                                        <td>昆明主城区</td>
+                                        <td>满100元立减16.6元</td>
+                                        <td>每周一8:30-22:00，"一部手机暖万家"APP</td>
+                                    </tr>
+                                    <tr>
+                                        <td>建设银行信用卡优惠</td>
+                                        <td>甘肃地区</td>
+                                        <td>95折，单月最高减200元</td>
+                                        <td>指定商户刷卡/挥卡/云闪付付款码缴费</td>
+                                    </tr>
+                                    <tr>
+                                        <td>中国银行随机立减</td>
+                                        <td>贵州地区</td>
+                                        <td>满10元随机立减，最高66元</td>
+                                        <td>中国银行APP"生活缴费→多彩宝"</td>
+                                    </tr>
+                                    <tr>
+                                        <td>郑州社保卡"生活缴费日"</td>
+                                        <td>郑州地区</td>
+                                        <td>领券满100随机减10~30元</td>
+                                        <td>每月15日10点，"郑州市民卡"平台</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="info-box" style="margin-top: 15px;">
+                            <strong>充值操作建议：</strong>
+                            <ul>
+                                <li>通过燃气公司官方公众号/小程序或当地政务APP缴费最安全</li>
+                                <li>可将大额账单拆单支付以增加享受优惠机会</li>
+                                <li>缴费前比较各支付渠道（支付宝、微信、云闪付）的优惠活动</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon" style="background: linear-gradient(135deg, #a78bfa, #8b5cf6); color: white;">📱</div>
+                        <h2 class="card-title">自动缴费：设置便利，定期管理</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="highlight-box">
+                            <strong>设置路径：</strong>在支付宝"车主服务"或微信"服务"中绑定车辆或户号，开通免密支付
+                        </div>
+
+                        <h3 style="margin: 20px 0 10px 0; color: var(--primary-color);">管理授权</h3>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                            <div class="success-box">
+                                <strong>支付宝</strong><br>
+                                「设置」→「支付设置」→「免密支付/自动扣款」
+                            </div>
+                            <div class="info-box">
+                                <strong>微信</strong><br>
+                                「我」→「服务」→右上角「…」→「扣费服务」
+                            </div>
+                        </div>
+
+                        <div class="warning-box" style="margin-top: 15px;">
+                            <strong>定期检查：</strong>每季度或每半年检查一次所有自动扣费授权列表，及时清理
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 安全防护部分 -->
+            <section id="safety" class="content-section">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon" style="background: linear-gradient(135deg, #ef4444, #dc2626); color: white;">🔌</div>
+                        <h2 class="card-title">居家安全：筑牢日常"防火墙"</h2>
+                    </div>
+                    <div class="card-content">
+                        <h3 style="margin: 20px 0 10px 0; color: var(--primary-color);">用电安全规范</h3>
+                        <ul>
+                            <li><strong>电器使用：</strong>杜绝超期服役（多数家电8-10年），避免同一插座使用多个大功率电器</li>
+                            <li><strong>插座与线路：</strong>使用新国标CCC认证插座，严禁"万能孔"插座。普通插排使用年限约3-5年，出现问题立即更换</li>
+                            <li><strong>应急处理：</strong>电器起火先切断电源，再用干粉灭火器或灭火毯覆盖灭火，切勿用水</li>
+                        </ul>
+
+                        <div class="important-box">
+                            <strong>防火安全核心——"三清三关"</strong>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 15px;">
+                                <div>
+                                    <strong>三清：</strong>
+                                    <ul>
+                                        <li>清厨房</li>
+                                        <li>清阳台</li>
+                                        <li>清楼道</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <strong>三关：</strong>
+                                    <ul>
+                                        <li>关电源</li>
+                                        <li>关燃气</li>
+                                        <li>关明火</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon" style="background: linear-gradient(135deg, #3b82f6, #2563eb); color: white;">🧰</div>
+                        <h2 class="card-title">应急准备：配置家庭"生命锦囊"</h2>
+                    </div>
+                    <div class="card-content">
+                        <h3 style="margin: 20px 0 10px 0; color: var(--primary-color);">应急物资分级储备</h3>
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="highlight-box">
+                                    <strong>基础版（满足3天生存需求）</strong>
+                                    <ul style="margin-top: 10px;">
+                                        <li>应急食品与水</li>
+                                        <li>防护与急救包</li>
+                                        <li>多功能手电筒（带手摇发电、收音）</li>
+                                        <li>高频救生哨</li>
+                                        <li>灭火毯/小型灭火器</li>
+                                        <li>过滤式消防自救呼吸器</li>
+                                        <li>保暖毯、雨衣、家庭应急卡</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="success-box">
+                                    <strong>升级版（按需扩充）</strong>
+                                    <ul style="margin-top: 10px;">
+                                        <li>婴幼儿用品</li>
+                                        <li>慢性病患者药品</li>
+                                        <li>针对灾害的装备（如救生衣）</li>
+                                        <li>重要物品（身份证、保单、现金等，用防水袋密封）</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="info-box" style="margin-top: 15px;">
+                            <strong>制定并演练家庭应急计划</strong>
+                            <ul style="margin-top: 10px;">
+                                <li>绘制家庭逃生图，规划两条逃生路线，确定紧急集合点</li>
+                                <li>全家每年至少进行<strong>2次应急演练</strong></li>
+                                <li>掌握灭火器"一看、二摇、三拔、四射"操作要领</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon" style="background: linear-gradient(135deg, #6366f1, #4f46e5); color: white;">🌪️</div>
+                        <h2 class="card-title">自然灾害应对：掌握避险"行动指南"</h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="table-responsive">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>灾害类型</th>
+                                        <th>震前/来临前</th>
+                                        <th>震时/来袭时</th>
+                                        <th>震后/过后</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>地震</strong></td>
+                                        <td>加固高大家具，清理通道，床置内墙边</td>
+                                        <td>室内"伏地、遮挡、手抓牢"姿势，躲避在坚固桌下；室外跑向空旷地</td>
+                                        <td>警惕余震，从楼梯有序撤离，勿乘电梯</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>台风/暴雨洪涝</strong></td>
+                                        <td>关紧门窗，移走阳台易坠物，车辆移至高处，低洼地区人员准备转移</td>
+                                        <td>避免外出，远离广告牌、大树；遇洪水向两侧高地逃离；车辆熄火被困应果断弃车</td>
+                                        <td>防范滑坡、泥石流；返家后检查房屋安全，做好消毒</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="highlight-box" style="margin-top: 15px;">
+                            <strong>政策赋能：用好安全"新标尺"</strong>
+                            <ul style="margin-top: 10px;">
+                                <li><strong>住宅安全升级：</strong>2025年5月1日起施行的《住宅项目规范》国标对防火、用电等提出更高要求</li>
+                                <li><strong>应急包标准明确：</strong>2025年11月1日实施的新版《家用防灾应急包》国家标准（GB/T 36750—2025）为选购合格产品提供依据</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <div class="floating-button" onclick="scrollToTop()">↑</div>
+    </div>
+
+    <script>
+        // Include footer template
+        fetch('/footer.html')
+            .then(response => response.text())
+            .then(data => {
+                const footerContainer = document.createElement('div');
+                footerContainer.innerHTML = data;
+                footerContainer.style.textAlign = 'center';
+                footerContainer.style.padding = '20px';
+                footerContainer.style.marginTop = 'auto';
+                document.body.appendChild(footerContainer);
+            })
+            .catch(error => console.error('Error loading footer:', error));
+
+        // 显示指定的内容部分
+        function showSection(sectionId, tabElement) {
+            try {
+                // 隐藏所有内容部分
+                const sections = document.querySelectorAll('.content-section');
+                sections.forEach(section => {
+                    section.classList.remove('active');
+                    section.setAttribute('aria-hidden', 'true');
+                });
+
+                // 显示选中的部分
+                const targetSection = document.getElementById(sectionId);
+                if (targetSection) {
+                    targetSection.classList.add('active');
+                    targetSection.setAttribute('aria-hidden', 'false');
+                } else {
+                    console.warn(`Section with id "${sectionId}" not found`);
+                    return;
+                }
+
+                // 更新导航标签状态
+                const tabs = document.querySelectorAll('.nav-tab');
+                tabs.forEach(tab => {
+                    tab.classList.remove('active');
+                    tab.setAttribute('aria-selected', 'false');
+                    tab.setAttribute('tabindex', '-1');
+                });
+
+                // 设置当前激活的标签
+                if (tabElement) {
+                    tabElement.classList.add('active');
+                    tabElement.setAttribute('aria-selected', 'true');
+                    tabElement.setAttribute('tabindex', '0');
+                }
+
+                // 滚动到页面顶部
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            } catch (error) {
+                console.error('Error in showSection:', error);
+            }
+        }
+
+        // 滚动到页面顶部
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // 搜索功能
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const sections = document.querySelectorAll('.content-section');
+            
+            if (searchTerm === '') {
+                // 如果搜索框为空，显示所有内容
+                sections.forEach(section => {
+                    const cardsInSection = section.querySelectorAll('.card');
+                    cardsInSection.forEach(card => {
+                        card.style.display = 'block';
+                    });
+                    section.classList.remove('active');
+                    section.setAttribute('aria-hidden', 'true');
+                });
+                return;
+            }
+
+            // 使用防抖优化的搜索函数
+            optimizedSearch(searchTerm);
+        });
+
+        // Clean up duplicate event listener and optimize search
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const sections = document.querySelectorAll('.content-section');
+            const cards = document.querySelectorAll('.card');
+            
+            if (searchTerm === '') {
+                // 如果搜索框为空，显示所有内容
+                sections.forEach(section => {
+                    const cardsInSection = section.querySelectorAll('.card');
+                    cardsInSection.forEach(card => {
+                        card.style.display = 'block';
+                    });
+                });
+                return;
+            }
+
+            sections.forEach(section => {
+                const cardsInSection = section.querySelectorAll('.card');
+                let sectionHasVisibleCards = false;
+
+                cardsInSection.forEach(card => {
+                    const cardContent = card.textContent.toLowerCase();
+                    if (cardContent.includes(searchTerm)) {
+                        card.style.display = 'block';
+                        sectionHasVisibleCards = true;
+                        
+                        // 高亮搜索关键词
+                        highlightSearchTerm(card, searchTerm);
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+
+                // 显示包含搜索结果的部分
+                if (sectionHasVisibleCards) {
+                    section.classList.add('active');
+                }
+            });
+
+            // 激活包含搜索结果的第一个标签
+            const activeSections = document.querySelectorAll('.content-section.active');
+            if (activeSections.length > 0) {
+                const firstActiveId = activeSections[0].id;
+                const tabs = document.querySelectorAll('.nav-tab');
+                tabs.forEach(tab => {
+                    tab.classList.remove('active');
+                    if (tab.textContent.toLowerCase().includes(firstActiveId.toLowerCase()) || 
+                        (firstActiveId === 'tax' && tab.textContent.includes('个税')) ||
+                        (firstActiveId === 'insurance' && tab.textContent.includes('医疗')) ||
+                        (firstActiveId === 'family' && tab.textContent.includes('保险')) ||
+                        (firstActiveId === 'student' && tab.textContent.includes('学生')) ||
+                        (firstActiveId === 'energy' && tab.textContent.includes('能源')) ||
+                        (firstActiveId === 'safety' && tab.textContent.includes('安全'))) {
+                        tab.classList.add('active');
+                    }
+                });
+            }
+        });
+
+        // 高亮搜索关键词
+        function highlightSearchTerm(element, searchTerm) {
+            // 这里可以实现更复杂的高亮逻辑
+            // 为了简化，暂时只显示包含搜索词的卡片
+        }
+
+        // 监听滚动事件，控制返回顶部按钮的显示
+        window.addEventListener('scroll', function() {
+            const floatingButton = document.querySelector('.floating-button');
+            if (window.pageYOffset > 300) {
+                floatingButton.style.display = 'flex';
+            } else {
+                floatingButton.style.display = 'none';
+            }
+        });
+
+        // 页面加载时隐藏返回顶部按钮
+        document.addEventListener('DOMContentLoaded', function() {
+            const floatingButton = document.querySelector('.floating-button');
+            floatingButton.style.display = 'none';
+        });
+
+        // 添加键盘快捷键支持
+        document.addEventListener('keydown', function(e) {
+            try {
+                // Ctrl/Cmd + F 聚焦搜索框
+                if ((e.ctrlKey || e.metaKey) && e.key === 'f') {
+                    e.preventDefault();
+                    const searchInput = document.getElementById('searchInput');
+                    if (searchInput) {
+                        searchInput.focus();
+                    }
+                }
+                
+                // ESC 清空搜索
+                if (e.key === 'Escape') {
+                    const searchInput = document.getElementById('searchInput');
+                    if (searchInput) {
+                        searchInput.value = '';
+                        searchInput.dispatchEvent(new Event('input'));
+                    }
+                }
+                
+                // 数字键 1-6 快速切换标签
+                if (e.key >= '1' && e.key <= '6') {
+                    const tabs = document.querySelectorAll('.nav-tab');
+                    const index = parseInt(e.key) - 1;
+                    if (tabs[index]) {
+                        tabs[index].click();
+                    }
+                }
+
+                // 左右箭头键切换标签
+                if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+                    const tabs = document.querySelectorAll('.nav-tab');
+                    const activeTab = document.querySelector('.nav-tab.active');
+                    let currentIndex = Array.from(tabs).indexOf(activeTab);
+                    
+                    if (e.key === 'ArrowLeft') {
+                        currentIndex = currentIndex > 0 ? currentIndex - 1 : tabs.length - 1;
+                    } else {
+                        currentIndex = currentIndex < tabs.length - 1 ? currentIndex + 1 : 0;
+                    }
+                    
+                    if (tabs[currentIndex]) {
+                        tabs[currentIndex].click();
+                    }
+                }
+            } catch (error) {
+                console.error('Error in keyboard navigation:', error);
+            }
+        });
+
+        // 添加加载动画和性能优化
+        window.addEventListener('load', function() {
+            // 使用 Intersection Observer for better performance
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            // 初始化卡片状态
+            const cards = document.querySelectorAll('.card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'all 0.5s ease';
+                card.style.transitionDelay = `${index * 50}ms`;
+                observer.observe(card);
+            });
+        });
+
+        // 防抖搜索函数，提升搜索性能
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        // 优化搜索性能
+        const optimizedSearch = debounce(function(searchTerm) {
+            const sections = document.querySelectorAll('.content-section');
+            
+            sections.forEach(section => {
+                const cardsInSection = section.querySelectorAll('.card');
+                let sectionHasVisibleCards = false;
+
+                cardsInSection.forEach(card => {
+                    const cardContent = card.textContent.toLowerCase();
+                    if (cardContent.includes(searchTerm)) {
+                        card.style.display = 'block';
+                        sectionHasVisibleCards = true;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+
+                if (sectionHasVisibleCards) {
+                    section.classList.add('active');
+                    section.setAttribute('aria-hidden', 'false');
+                }
+            });
+        }, 300); // 300ms 防抖延迟
+
+        // 添加打印样式
+        window.addEventListener('beforeprint', function() {
+            document.body.classList.add('printing');
+        });
+
+        window.addEventListener('afterprint', function() {
+            document.body.classList.remove('printing');
+        });
+    </script>
+</body>
+</html>

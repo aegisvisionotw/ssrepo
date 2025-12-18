@@ -200,7 +200,7 @@
   </head>
   <body>
     <div class="container">
-      <header>
+      <header role="banner">
         <h1>Resources | 资源</h1>
         <p class="subtitle">
           Explore AI tools, cloud services, and development platforms |
@@ -208,7 +208,9 @@
         </p>
       </header>
 
-      <main class="main-content">
+      <main role="main" class="main-content">
+        <section aria-labelledby="resources-heading">
+          <h2 id="resources-heading" class="visually-hidden">AI and Development Resources</h2>
         <div class="table-container">
           <table>
             <thead>
@@ -333,6 +335,7 @@
             </tbody>
           </table>
         </div>
+        </section>
       </main>
     </div>
     <script>

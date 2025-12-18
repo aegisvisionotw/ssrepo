@@ -161,6 +161,64 @@ body {
 4. **Deploy**: Push changes to production
 5. **Monitor**: Watch for issues post-deployment
 
+## 🦶 Footer Integration Pattern
+
+### Standard Footer Implementation
+All pages should include a dynamically loaded footer using the following pattern:
+
+#### HTML Structure
+```html
+<div id="footer-container"></div>
+```
+
+#### JavaScript Implementation
+```javascript
+// Include footer template
+fetch('/footer.html')
+    .then(response => response.text())
+    .then(data => {
+        const footerContainer = document.getElementById('footer-container');
+        if (footerContainer) {
+            footerContainer.innerHTML = data;
+            footerContainer.style.textAlign = 'center';
+            footerContainer.style.padding = '20px';
+            footerContainer.style.marginTop = 'auto';
+        }
+    })
+    .catch(error => console.error('Error loading footer:', error));
+```
+
+#### Alternative Implementation (for pages without pre-existing container)
+```javascript
+// Include footer template
+fetch('/footer.html')
+    .then(response => response.text())
+    .then(data => {
+        const footerContainer = document.createElement('div');
+        footerContainer.innerHTML = data;
+        footerContainer.style.textAlign = 'center';
+        footerContainer.style.padding = '20px';
+        footerContainer.style.marginTop = 'auto';
+        document.body.appendChild(footerContainer);
+    })
+    .catch(error => console.error('Error loading footer:', error));
+```
+
+### Footer Integration Checklist
+- [ ] **Footer Container**: Add `<div id="footer-container"></div>` to HTML
+- [ ] **Fetch Script**: Include footer loading JavaScript in page script
+- [ ] **Error Handling**: Ensure proper error handling for failed footer loads
+- [ ] **Styling**: Apply consistent styling (center, padding, margin)
+- [ ] **Path Verification**: Confirm `/footer.html` path is correct
+- [ ] **Cross-browser Test**: Verify footer loads correctly in all browsers
+
+### Implementation Notes
+- Place the footer container at the end of the `<body>` tag
+- Load footer asynchronously to prevent blocking page rendering
+- Apply consistent styling to match page design
+- Handle errors gracefully with console logging
+- Use absolute paths for footer file reference
+
 ## 📋 Reporting Template
 
 When making changes, include this checklist in your commit message:
