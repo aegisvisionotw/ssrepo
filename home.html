@@ -433,8 +433,31 @@
                 </table>
             </div>
 
+            <div class="email-section" style="margin-top: 3rem; background: rgba(255, 255, 255, 0.95); border-radius: 16px; padding: 2rem; box-shadow: var(--shadow-lg);">
+                <h2 class="section-title">📧 Contact Admin OTW128 → 联系管理员 OTW128</h2>
+                <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">Click below to open your email client and send reminders to Admin OTW128 → 点击下方打开邮件客户端，向管理员 OTW128 发送提醒</p>
+                
+                <button id="emailAdminBtn" class="link-btn" style="width: 100%; justify-content: center; padding: 1.25rem; font-size: 1.1rem;">
+                    <svg class="icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                    </svg>
+                    Open Email Client → 打开邮件客户端
+                </button>
+                
+                <div id="emailStatus" style="margin-top: 1rem; padding: 1rem; border-radius: 8px; display: none;"></div>
+                
+                <div style="margin-top: 1.5rem; padding: 1rem; background: #f0f9ff; border: 1px solid #0ea5e9; border-radius: 8px;">
+                    <h4 style="margin-bottom: 0.5rem; color: #0c4a6e;">📋 Email Template → 邮件模板</h4>
+                    <p style="font-size: 0.9rem; color: #0c4a6e; margin-bottom: 0.5rem;">Subject: [Reminder Request] Reminder from OTW128 Tools</p>
+                    <p style="font-size: 0.9rem; color: #0c4a6e; margin-bottom: 0.5rem;">主题: [提醒请求] 来自 OTW128 工具的提醒</p>
+                    <p style="font-size: 0.9rem; color: #0c4a6e;">Body: Please describe your reminder or question below...</p>
+                    <p style="font-size: 0.9rem; color: #0c4a6e;">正文: 请在下方描述您的提醒或问题...</p>
+                </div>
+            </div>
+
             <div class="footer-info">
                 <p>Need help? Contact support or check our documentation for more information. → 需要帮助？联系支持或查看我们的文档获取更多信息。</p>
+                <p style="margin-top: 0.5rem; font-size: 0.8rem;">📧 Admin Email: noreply@otw128.net → 管理员邮箱：noreply@otw128.net</p>
             </div>
         </main>
     </div>
@@ -476,6 +499,80 @@
                     setTimeout(() => ripple.remove(), 600);
                 });
             });
+
+            // Email client functionality
+            const emailAdminBtn = document.getElementById('emailAdminBtn');
+            const emailStatus = document.getElementById('emailStatus');
+            
+            emailAdminBtn.addEventListener('click', function() {
+                const adminEmail = 'noreply@otw128.net';
+                const subject = encodeURIComponent('[Reminder Request] Reminder from OTW128 Tools / 提醒请求：来自 OTW128 工具的提醒');
+                const body = encodeURIComponent(`Dear Admin OTW128,
+
+Please help me with the following reminder/request:
+
+[Please describe your reminder or question here...]
+
+---
+Sent from: ${window.location.href}
+Date: ${new Date().toLocaleString()}
+
+---
+
+尊敬的管理员 OTW128，
+
+请帮助我处理以下提醒/请求：
+
+[请在此处描述您的提醒或问题...]
+
+---
+发送自：${window.location.href}
+日期：${new Date().toLocaleString()}`);
+                
+                // Create mailto link
+                const mailtoLink = `mailto:${adminEmail}?subject=${subject}&body=${body}`;
+                
+                // Show status
+                showStatus('📧 Opening your email client... → 正在打开您的邮件客户端...', 'info');
+                
+                // Try to open email client
+                try {
+                    window.location.href = mailtoLink;
+                    
+                    // Show success after a short delay
+                    setTimeout(() => {
+                        showStatus('✅ Email client opened! You can now send your message to Admin OTW128 → ✅ 邮件客户端已打开！您现在可以向管理员 OTW128 发送消息', 'success');
+                    }, 500);
+                } catch (error) {
+                    showStatus('❌ Could not open email client. Please manually email: noreply@otw128.net → ❌ 无法打开邮件客户端。请手动发送邮件至：noreply@otw128.net', 'error');
+                    console.error('Email client error:', error);
+                }
+            });
+            
+            function showStatus(message, type) {
+                emailStatus.textContent = message;
+                emailStatus.style.display = 'block';
+                
+                // Set background color based on type
+                if (type === 'success') {
+                    emailStatus.style.background = '#dcfce7';
+                    emailStatus.style.color = '#166534';
+                    emailStatus.style.border = '1px solid #86efac';
+                } else if (type === 'error') {
+                    emailStatus.style.background = '#fee2e2';
+                    emailStatus.style.color = '#dc2626';
+                    emailStatus.style.border = '1px solid #fca5a5';
+                } else {
+                    emailStatus.style.background = '#e0f2fe';
+                    emailStatus.style.color = '#0284c7';
+                    emailStatus.style.border = '1px solid #7dd3fc';
+                }
+                
+                // Hide status after 5 seconds
+                setTimeout(() => {
+                    emailStatus.style.display = 'none';
+                }, 5000);
+            }
         });
 
         // Add ripple animation
