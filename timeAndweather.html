@@ -140,6 +140,13 @@
             background: var(--secondary-color);
             border-radius: 8px;
             margin-top: 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .weather-info:hover {
+            background: #e5e7eb;
+            transform: translateY(-1px);
         }
 
         .weather-main {
@@ -214,6 +221,7 @@
         <header>
             <h1>Time & Weather | 时间和天气</h1>
             <p class="subtitle">Real-time time and weather for top travel destinations worldwide | 全球热门旅游城市实时时间和天气</p>
+            <p style="color: orange; font-size: 0.9rem; margin: 0.5rem 0;">⚠️ Weather info is mock data for demo | 天气信息为演示数据，点击可跳转到 OpenWeatherMap 查看真实天气</p>
             <button class="refresh-btn" onclick="refreshAllData()">🔄 Refresh Data | 刷新数据</button>
             <div class="last-updated" id="lastUpdated">Last updated: Loading... | 最后更新：加载中...</div>
         </header>
@@ -228,27 +236,27 @@
     <script>
         // Top 20 most popular travel cities
         const cities = [
-            { name: "Shanghai", timezone: "Asia/Shanghai", country: "CN", lat: 31.2304, lon: 121.4737 },
-            { name: "Suzhou", timezone: "Asia/Shanghai", country: "CN", lat: 31.2989, lon: 120.5853 },
-            { name: "Tokyo", timezone: "Asia/Tokyo", country: "JP", lat: 35.6762, lon: 139.6503 },
-            { name: "Paris", timezone: "Europe/Paris", country: "FR", lat: 48.8566, lon: 2.3522 },
-            { name: "New York", timezone: "America/New_York", country: "US", lat: 40.7128, lon: -74.0060 },
-            { name: "London", timezone: "Europe/London", country: "GB", lat: 51.5074, lon: -0.1278 },
-            { name: "Dubai", timezone: "Asia/Dubai", country: "AE", lat: 25.2048, lon: 55.2708 },
-            { name: "Singapore", timezone: "Asia/Singapore", country: "SG", lat: 1.3521, lon: 103.8198 },
-            { name: "Los Angeles", timezone: "America/Los_Angeles", country: "US", lat: 34.0522, lon: -118.2437 },
-            { name: "Barcelona", timezone: "Europe/Madrid", country: "ES", lat: 41.3851, lon: 2.1734 },
-            { name: "Rome", timezone: "Europe/Rome", country: "IT", lat: 41.9028, lon: 12.4964 },
-            { name: "Bangkok", timezone: "Asia/Bangkok", country: "TH", lat: 13.7563, lon: 100.5018 },
-            { name: "Istanbul", timezone: "Europe/Istanbul", country: "TR", lat: 41.0082, lon: 28.9784 },
-            { name: "Sydney", timezone: "Australia/Sydney", country: "AU", lat: -33.8688, lon: 151.2093 },
-            { name: "Hong Kong", timezone: "Asia/Hong_Kong", country: "HK", lat: 22.3193, lon: 114.1694 },
-            { name: "Amsterdam", timezone: "Europe/Amsterdam", country: "NL", lat: 52.3676, lon: 4.9041 },
-            { name: "Seoul", timezone: "Asia/Seoul", country: "KR", lat: 37.5665, lon: 126.9780 },
-            { name: "Mumbai", timezone: "Asia/Kolkata", country: "IN", lat: 19.0760, lon: 72.8777 },
-            { name: "Toronto", timezone: "America/Toronto", country: "CA", lat: 43.6532, lon: -79.3832 },
-            { name: "Berlin", timezone: "Europe/Berlin", country: "DE", lat: 52.5200, lon: 13.4050 },
-            { name: "Moscow", timezone: "Europe/Moscow", country: "RU", lat: 55.7558, lon: 37.6173 },
+            { name: "Shanghai", timezone: "Asia/Shanghai", country: "CN", lat: 31.2304, lon: 121.4737 ,owmID: 1796236},
+            { name: "Suzhou", timezone: "Asia/Shanghai", country: "CN", lat: 31.2989, lon: 120.5853 ,owmID: 1886760},
+            { name: "Tokyo", timezone: "Asia/Tokyo", country: "JP", lat: 35.6762, lon: 139.6503 ,owmID: 1850147},
+            { name: "Paris", timezone: "Europe/Paris", country: "FR", lat: 48.8566, lon: 2.3522 ,owmID: 2988507},
+            { name: "New York", timezone: "America/New_York", country: "US", lat: 40.7128, lon: -74.0060 ,owmID: 5128638},
+            { name: "London", timezone: "Europe/London", country: "GB", lat: 51.5074, lon: -0.1278 ,owmID: 2643743},
+            { name: "Dubai", timezone: "Asia/Dubai", country: "AE", lat: 25.2048, lon: 55.2708 ,owmID: 292223},
+            { name: "Singapore", timezone: "Asia/Singapore", country: "SG", lat: 1.3521, lon: 103.8198 ,owmID: 1880252},
+            { name: "Los Angeles", timezone: "America/Los_Angeles", country: "US", lat: 34.0522, lon: -118.2437 ,owmID: 5368361},
+            { name: "Barcelona", timezone: "Europe/Madrid", country: "ES", lat: 41.3851, lon: 2.1734 ,owmID: 3128760},
+            { name: "Rome", timezone: "Europe/Rome", country: "IT", lat: 41.9028, lon: 12.4964 ,owmID: 3169070},
+            { name: "Bangkok", timezone: "Asia/Bangkok", country: "TH", lat: 13.7563, lon: 100.5018 ,owmID: 1609350},
+            { name: "Istanbul", timezone: "Europe/Istanbul", country: "TR", lat: 41.0082, lon: 28.9784 ,owmID: 745044},
+            { name: "Sydney", timezone: "Australia/Sydney", country: "AU", lat: -33.8688, lon: 151.2093 ,owmID: 2147714},
+            { name: "Hong Kong", timezone: "Asia/Hong_Kong", country: "HK", lat: 22.3193, lon: 114.1694 ,owmID: 1819729},
+            { name: "Amsterdam", timezone: "Europe/Amsterdam", country: "NL", lat: 52.3676, lon: 4.9041 ,owmID: 2759794},
+            { name: "Seoul", timezone: "Asia/Seoul", country: "KR", lat: 37.5665, lon: 126.9780 ,owmID: 1835848},
+            { name: "Mumbai", timezone: "Asia/Kolkata", country: "IN", lat: 19.0760, lon: 72.8777 ,owmID: 1275339},
+            { name: "Toronto", timezone: "America/Toronto", country: "CA", lat: 43.6532, lon: -79.3832 ,owmID: 6167865},
+            { name: "Berlin", timezone: "Europe/Berlin", country: "DE", lat: 52.5200, lon: 13.4050 ,owmID: 2950159},
+            { name: "Moscow", timezone: "Europe/Moscow", country: "RU", lat: 55.7558, lon: 37.6173 ,owmID: 524901}
 
         ];
 
@@ -376,7 +384,7 @@
                     <div class="time-display">${formatTime(now, city.timezone)}</div>
                     <div class="timezone">${city.timezone} | ${formatDate(now, city.timezone)}</div>
                     
-                    <div class="weather-info">
+                    <div class="weather-info" onclick="window.open('https://openweathermap.org/city/${city.owmID}', '_blank')">
                         <div class="weather-main">
                             <span class="weather-icon">${weatherIcons[weather.icon] || '🌡️'}</span>
                             <div>
@@ -388,6 +396,7 @@
                             <div>💧 ${weather.humidity}%</div>
                             <div>💨 ${weather.windSpeed} m/s</div>
                             ${weather.isMock ? '<div style="color: orange;">📡 Demo Data</div>' : ''}
+                            <div style="color: var(--primary-color); font-size: 0.7rem; margin-top: 2px;">🔗 Click for real weather</div>
                         </div>
                     </div>
                 </div>

@@ -61,6 +61,23 @@ This project contains a modern web dashboard with login functionality. → 这�
   - Modern glassmorphism design with animations → 现代毛玻璃设计和动画效果
   - Fully responsive for all devices → 全设备响应式设计
 
+### 7. reminderCN.html → 提醒工具文件
+- **Purpose → 用途**: 2025-2026 annual family life and financial planning reminders → 2025-2026年度家庭生活与财务规划全提醒
+- **Features → 特性**:
+  - Comprehensive monthly reminders for personal finance and family life → 个人财务和家庭生活的全面月度提醒
+  - Tax-related deadlines and financial planning milestones → 税务相关截止日期和财务规划里程碑
+  - Bilingual content with clear categorization → 双语内容，分类清晰
+  - Mobile-responsive design with modern UI → 现代化UI的移动端响应式设计
+
+### 8. timeAndweather.html → 时间和天气文件
+- **Purpose → 用途**: Real-time time and weather for top travel destinations worldwide → 全球热门旅游城市实时时间和天气
+- **Features → 特性**:
+  - Real-time clock display for 20+ major cities worldwide → 20+全球主要城市实时时钟显示
+  - Mock weather data with clickable links to OpenWeatherMap → 模拟天气数据，可点击跳转到OpenWeatherMap
+  - Automatic time updates every second → 每秒自动更新时间
+  - Modern glassmorphism design with city flags → 现代毛玻璃设计，显示城市国旗
+  - Mobile-responsive grid layout → 移动端响应式网格布局
+
 ## Design Features → 设计特性
 
 ### Visual Design → 视觉设计
@@ -114,16 +131,45 @@ English Text → 中文文本
      - Click "Login → 登录" for authentication → 点击"Login → 登录"进行认证
      - Click "Use → 使用" for Calculator → 点击"Use → 使用"使用多模式计算器
      - Click "View → 查看" for Resources → 点击"View → 查看"查看资源目录
+     - Click "View → 查看" for Reminder CN → 点击"View → 查看"查看提醒工具
+     - Click "View → 查看" for Time & Weather → 点击"View → 查看"查看时间和天气
    - **Finance/Economics → 金融经济**: 
      - Click "View → 查看" for Buffett Letters → 点击"View → 查看"查看巴菲特致股东信
      - Click "View → 查看" for Personal Income Tax → 点击"View → 查看"查看中国个人所得税指南
 3. **Access content → 访问内容**: Navigate to selected service page → 导航到选定的服务页面
 4. **Interact with features → 交互功能**: Use forms, read content, or explore data → 使用表单、阅读内容或探索数据
 
+### Quick Access Commands → 快速访问命令
+
+#### /cr Command → /cr 命令
+- **Purpose → 用途**: Quick access to the CodeBuddy Agent Guidelines → 快速访问CodeBuddy代理指南
+- **Usage → 用法**: Type `/cr` in any supported interface → 在任何支持的界面中输入`/cr`
+- **Function → 功能**: 
+  - Opens the CodeBuddy_Agent_Guidelines.md file → 打开CodeBuddy_Agent_Guidelines.md文件
+  - Provides comprehensive development guidelines and best practices → 提供全面的开发指南和最佳实践
+  - Includes coding standards, project structure, and workflow recommendations → 包含编码标准、项目结构和工作流程建议
+- **Benefits → 好处**:
+  - Fast access to development resources → 快速访问开发资源
+  - Consistent coding practices across the team → 团队间一致的编码实践
+  - Reference for troubleshooting and optimization → 故障排除和优化的参考
+- **Access Methods → 访问方式**:
+  - Command line interface → 命令行界面
+  - Integrated development environment (IDE) → 集成开发环境(IDE)
+  - Web application command palette → Web应用程序命令面板
+
+#### Other Available Commands → 其他可用命令
+- `/help` - Show all available commands → 显示所有可用命令
+- `/home` - Navigate to home page → 导航到首页
+- `/login` - Go to login page → 前往登录页面
+- `/tools` - Access tools section → 访问工具部分
+- `/finance` - Access finance section → 访问金融部分
+
 ## Technical Details → 技术细节
 
 ### Files Added → 新增文件
 - **resources.html → 资源页面**: Resource directory with AI tools and services → 带有AI工具和服务的资源目录
+- **reminderCN.html → 提醒页面**: 2025-2026 annual family life and financial planning reminders → 2025-2026年度家庭生活与财务规划全提醒
+- **timeAndweather.html → 时间天气页面**: Real-time time and weather for top travel destinations worldwide → 全球热门旅游城市实时时间和天气
 
 ### Technologies Used → 使用的技术
 - **HTML5 → HTML5**: Semantic markup → 语义化标记
@@ -162,8 +208,8 @@ Potential improvements could include: → 可能的改进包括：
 ---
 
 **Author → 作者**: Web Dashboard Team → 网络仪表板团队  
-**Version → 版本**: 1.4.0  
-**Last Updated → 最后更新**: 2025-12-17
+**Version → 版本**: 1.5.0  
+**Last Updated → 最后更新**: 2025-12-19
 
 ---
 
